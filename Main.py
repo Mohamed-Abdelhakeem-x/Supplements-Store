@@ -4,21 +4,20 @@ app = flask(__name__)
 
 @app.route("/")
 @app.route("/Home")
-
 def index():
-    return "Welcome to home page"
+    return render_template('Home.HTML', title = "Home", cssFile = "main.css")
 
 @app.route("/About")
 def about():
-    return "Welcome to about page"
+    return render_template('About.HTML', title = "About", cssFile = "About.css")
 
 @app.route("/Shop")
 def Shop():
-    return "Welcome to Shopping page"
+    return render_template('Shop.HTML', title = "Shop", cssFile = "Shop.css")
 
 @app.route("/Hot-Deals")
 def Hot_Deals():
-    return "Welcome to Hot Deals page"
+    return render_template('Hot-Deals.HTML', title = "Hot Deals", cssFile = "Hot-Deals.css")
 
 if __name__ == "__main__":
     app.run()
