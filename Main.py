@@ -19,5 +19,24 @@ def Shop():
 def Hot_Deals():
     return render_template('Hot-Deals.HTML', title = "Hot Deals", cssFile = "Hot-Deals.css")
 
+def login():
+   form = LoginForm()
+   if form.validate_on_submit():
+      if form.email.data == "abdo@gmail.com" and form.password.data == "123456":
+         flash('Login Successfully', 'success')
+         return redirect(url_for('home'))
+      else:
+         flash('Invalid Credential', 'danger')
+   return render_template('login.html', title="Login", form=form)
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+   form = RegisterForm()
+   if form.validate_on_submit():
+      flash('Account Created', 'success')
+      return redirect(url_for('home'))
+   
+   return render_template('register.html', title="Sign up",form=form)
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True,port=3000)
