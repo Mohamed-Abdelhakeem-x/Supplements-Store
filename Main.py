@@ -4,7 +4,7 @@ from forms import RegisterForm, LoginForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sajdpfj apsosa fposkaf'
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 @app.route("/Home")
 def index():
     return render_template('index.HTML', title = "Home", cssFile = "Static/css/main.css")
