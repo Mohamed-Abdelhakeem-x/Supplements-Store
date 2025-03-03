@@ -28,7 +28,7 @@ def login():
          flash('Login Successfully', 'success')
          return redirect(url_for('home'))
             
-   return render_template('login.html', title="Login", form=form)
+   return render_template('login.html', title="Login", form=form, cssFile = "Static/css/Login.css")
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -37,7 +37,7 @@ def register():
       flash('Account Created', 'success')
       return redirect(url_for('home'))
    
-   return render_template('register.html', title="Sign up",form=form)
+   return render_template('register.html', title="Sign up",form=form, cssFile = "Static/css/signup.css")
 
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
