@@ -1,0 +1,9 @@
+body{
+    height: 100vh;
+}
+main{
+    padding: 0 40px;
+}
+footer{
+    text-align: center;
+}
