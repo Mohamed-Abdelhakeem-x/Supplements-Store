@@ -2,12 +2,12 @@ from flask import Flask, render_template , redirect, url_for, flash
 from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sajdpfj apsosa fposkaf'
+app.config['SECRET_KEY'] = '124pofds 12h413kn f13pomo5'
 
 @app.route('/')
 @app.route("/Home")
 def index():
-    return render_template('index.HTML', title = "Home", cssFile = "Static/css/main.css")
+    return render_template('Home.HTML', title = "Home", cssFile = "Static/css/home.css")
 
 @app.route("/About")
 def about():
@@ -35,7 +35,7 @@ def register():
    form = RegisterForm()
    if form.validate_on_submit():
       flash('Account Created', 'success')
-      return redirect(url_for('home'))
+      return redirect(url_for('Home'))
    
    return render_template('register.html', title="Sign up",form=form, cssFile = "Static/css/signup.css")
 

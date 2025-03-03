@@ -8,6 +8,7 @@ font-style: italic;
 text-align: center;
 color: rgb(0, 10, 196);
 margin-top: 10px;
+font-weight: bold;
 }
 
 * {box-sizing: border-box}
