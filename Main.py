@@ -37,7 +37,7 @@ def register():
       flash('Account Created', 'success')
       return redirect(url_for('Home'))
    
-   return render_template('register.html', title="Sign up",form=form, cssFile = "Static/css/signup.css")
+   return render_template('signup.html', title="Sign up",form=form, cssFile = "Static/css/signup.css")
 
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
