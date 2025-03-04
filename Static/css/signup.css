@@ -2,7 +2,7 @@
     font-family: Arial;
     font-style: italic;
     text-align: center;
-    color: rgb(0, 10, 196);
+    color: rgb(180, 27, 0);
     margin-top: 45px;
     font-weight: bold;
     }
@@ -43,7 +43,7 @@ hr {
 
 /* Set a style for the submit/register button */
 .registerbtn {
-  background-color: #0407aa;
+  background-color: rgb(180, 27, 0);
   color: white;
   padding: 16px 20px;
   margin: 8px 0;
@@ -59,11 +59,19 @@ hr {
 
 /* Add a blue text color to links */
 a {
-  color: dodgerblue;
+  color: rgb(180, 27, 0);
 }
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {
   background-color: #f1f1f1;
   text-align: center;
+}
+
+.head{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(180, 27, 0);
+  padding: 10px;
+  color: aliceblue;
 }

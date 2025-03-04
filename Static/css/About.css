@@ -1,0 +1,25 @@
+.heading{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.p {
+ font-family: Arial, Helvetica, sans-serif;
+ text-align: center;
+ align-items: center;
+ width: 300px;   
+ opacity: 0.8;
+ color: black;
+}
+
+.main{
+scrollbar-width: 40px;
+}
+
+.head{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(180, 27, 0);
+    padding: 10px;
+    color: aliceblue;
+}
