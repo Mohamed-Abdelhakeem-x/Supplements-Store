@@ -4,6 +4,7 @@ from forms import RegisterForm, LoginForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
 
+
 @app.route('/')
 @app.route("/Home")
 def Home():
