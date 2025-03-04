@@ -59,16 +59,18 @@
           <hr>
       
           <label for="email"><b>{{ form.email.label }}</b></label>
-          <input type="text" placeholder="Enter Email" name="email" id="email" required>
-      
+          
+          {{ form.email(class="input-field", placeholder = "Enter Email") }}
+          
           <label for="psw"><b>{{ form.password.label }}</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          {{ form.password(class="input-field", placeholder = "Enter Password") }}
       
           <hr>
           <label>
-          <input type="checkbox" class="checkbox"> <span style="margin-bottom: 80;">{{ form.remember.label }}</span>
+            {{ form.remember(id="remember-checkbox", class="checkbox") }} {{ form.remember.label }}
+          
         </label>
-          <button type="submit" class="login-btn">Login</button>
+        {{ form.login(id="login-button", class="login-btn") }}
         </div>
       
       </form>
