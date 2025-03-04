@@ -6,7 +6,7 @@ app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
 
 @app.route('/')
 @app.route("/Home")
-def index():
+def Home():
     return render_template('Home.HTML', title = "Home", cssFile = "Static/css/Home.css")
 
 @app.route("/About")
@@ -25,19 +25,21 @@ def Hot_Deals():
 def login():
    form = LoginForm()
    if form.validate_on_submit():
-         flash('Login Successfully', 'success')
-         return redirect(url_for('Home'))
-            
-   return render_template('login.HTML', title="Login", form=form, cssFile = "Static/css/Login.css")
+       if form.email.data == "admin" and form.password.data == "admin":
+            flash("Login Successful!", "success")
+            return redirect(url_for("Home"))
+       else:
+            flash("Invalid email or password.", "danger")
+   return render_template('login.HTML', form=form)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
    form = RegisterForm()
    if form.validate_on_submit():
-      flash('Account Created', 'success')
-      return redirect(url_for('login'))
+      flash(f"Account created for {form.username.data}!", "success")
+      return redirect(url_for("login"))
    
-   return render_template('signup.HTML', title="Sign-Up",form=form, cssFile = "Static/css/signup.css")
+   return render_template('signup.HTML',form=form)
 
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
