@@ -60,19 +60,19 @@
         <p>Please fill in this form to create an account.</p>
         <hr>
         
-        <label for="username"><b>Username</b></label>
+        <label for="username"><b>{{ form.username.label }}</b></label>
         <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
-        <label for="email"><b>Email</b></label>
+        <label for="email"><b>{{ form.email.label }}</b></label>
         <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-        <label for="Mobile Number"><b>Mobile Number</b></label>
+        <label for="Mobile Number"><b>{{ form.phone.label }}</b></label>
         <input type="tel" placeholder="(+20) 123-456-789" name="telphone number" id="telphone number" required>
 
-        <label for="psw"><b>Password</b></label>
+        <label for="psw"><b>{{ form.password.label }}</b></label>
         <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
     
-        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <label for="psw-repeat"><b>{{ form.confirm_password.label }}</b></label>
         <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
         <button type="submit" class="registerbtn">Register</button>
         </div>

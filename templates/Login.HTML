@@ -58,15 +58,15 @@
           <p>Please fill in this form to login to your account.</p>
           <hr>
       
-          <label for="email"><b>Email</b></label>
+          <label for="email"><b>{{ form.email.label }}</b></label>
           <input type="text" placeholder="Enter Email" name="email" id="email" required>
       
-          <label for="psw"><b>Password</b></label>
+          <label for="psw"><b>{{ form.password.label }}</b></label>
           <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
       
           <hr>
           <label>
-          <input type="checkbox" class="checkbox"> <span style="margin-bottom: 80;">Remember me</span>
+          <input type="checkbox" class="checkbox"> <span style="margin-bottom: 80;">{{ form.remember.label }}</span>
         </label>
           <button type="submit" class="login-btn">Login</button>
         </div>
