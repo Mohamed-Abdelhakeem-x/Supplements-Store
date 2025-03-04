@@ -3,8 +3,7 @@
 }
 
 .login-page-title{
-font-family: Arial;
-font-style: italic;
+font-family:Arial, Helvetica, sans-serif;
 text-align: center;
 color: rgb(180, 27, 0);
 margin-top: 45px;
@@ -50,6 +49,7 @@ hr {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  border-radius: 25px;
 }
 
 .login-btn:hover {
