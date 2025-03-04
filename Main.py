@@ -17,10 +17,6 @@ def about():
 def Shop():
     return render_template('Shop.HTML', title = "Shop", cssFile = "Static/css/Shop.css")
 
-@app.route("/Hot-Deals")
-def Hot_Deals():
-    return render_template('Hot-Deals.HTML', title = "Hot Deals", cssFile = "Static/css/Hot-Deals.css")
-
 @app.route('/login', methods=['GET','POST'])
 def login():
    form = LoginForm()
