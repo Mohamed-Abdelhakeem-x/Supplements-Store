@@ -14,3 +14,42 @@
 .footer{
     text-align: center;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+.container {
+    padding: 50px 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+.features {
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.feature {
+    max-width: 250px;
+    text-align: center;
+}
+.brand {
+    font-size: 40px;
+    color: #000;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-weight: bold;
+    color: rgb(180, 27, 0);
+}
+p {
+    font-size: 16px;
+    color: #555;
+}
