@@ -45,7 +45,6 @@ p {
 }
 .NewsLetter{
     display: inline-block;
-    border: solid;
     margin: 30px;
 }
 .Main-Title{
@@ -60,6 +59,18 @@ p {
     color: aliceblue;
     border-radius: 20px;
 }
-.newsletter-btn{
-    color:rgb(180, 27, 0);
+.subscribe{
+    padding: 6px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(180, 27, 0);
+    border: none;
+}
+.subscribe:hover{
+   
+}
+.emailme{
+    border-radius: 8px;
+    margin-right: 3px;
+    size: 100%;
 }
