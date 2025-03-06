@@ -81,3 +81,6 @@ a {
   color: rgb(180, 27, 0);
   border-color: rgb(180, 27, 0);
 }
+.branding-navbar{
+  font-weight: bold;
+}
