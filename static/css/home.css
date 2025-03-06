@@ -43,3 +43,23 @@ p {
     color: #555;
     display: inline-block;
 }
+.NewsLetter{
+    display: inline-block;
+    border: solid;
+    margin: 30px;
+}
+.Main-Title{
+    text-align: left;
+    font-style: italic;
+}
+.description{
+    color: #555;
+    opacity: 0.9;
+}
+.enter-email{
+    color: aliceblue;
+    border-radius: 20px;
+}
+.newsletter-btn{
+    color:rgb(180, 27, 0);
+}
