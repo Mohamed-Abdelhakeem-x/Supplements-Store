@@ -20,13 +20,19 @@ body {
     background-color: #ffffff;
 }
 .maindifferencediv {
-    margin: 30px;
+
 }
 .features{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns:1fr 1fr;
     column-gap: 20px;
-    row-gap: 30px;
+    row-gap: 40px;
+    padding: 40px;
+    text-align: center;
+}
+.feature{
+    border-radius: 15px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
 }
 h2 {
     font-size: 25px;
@@ -43,33 +49,50 @@ p {
     color: #555;
     display: inline-block;
 }
-.NewsLetter{
-    display: inline-block;
-    margin: 30px;
+.Pre-last-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+    background-color: rgb(51, 51, 51);
+}
+.NewsLetter-container{
+
 }
 .Main-Title{
     text-align: left;
     font-style: italic;
+    margin-bottom: 0px;
+    color: #ffffff;
 }
 .description{
-    color: #555;
-    opacity: 0.9;
-}
-.enter-email{
-    color: aliceblue;
-    border-radius: 20px;
-}
-.subscribe{
-    padding: 6px;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(180, 27, 0);
-    border: none;
+    color: #fffdfd;
+    opacity: 0.8;
+    margin-top: 0px;
 }
 .emailme{
-    border-radius: 8px;
-    margin-right: 3px;
-    size: 100%;
+    background-color: rgb( 255 255 255);
+    border-radius: 20px;
+    width: 50%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+.subscribe{
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(180, 27, 0);
+    border: solid;
+    border-color: rgb(180, 27, 0);
+    width: 12%;
+    padding: 10px;
+}
+.subscribe:hover{
+    color: rgb(180, 27, 0);
+    background-color: #ffffff;
+}
+.last-row{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }
 .branding-navbar{
     font-weight: bold;
