@@ -23,7 +23,7 @@ def login():
    form = LoginForm()
    if form.validate_on_submit():
        if form.email.data == "admin" and form.password.data == "admin":
-            flash("Login Successful!", "success")
+            flash("Form submitted successfully!", "success")
             return redirect(url_for("Home"))
        else:
             flash("Invalid email or password.", "danger")
