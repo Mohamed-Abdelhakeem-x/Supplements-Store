@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="/static/css/About.css">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'js/bootstrap.bundle.min.js')}}">
+</head>
+<body class="main">
+  
+  <header>
+    <h6 class="head">Shop Now</h6>
+  </header>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{url_for('Home')}}" style="color: rgb(180, 27, 0);"><span class="branding-navbar">Prime</span> supplements</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('Home')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('Shop')}}">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('about')}}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('login')}}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('register')}}">Sign-Up</a>
+              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <hr>
+
+    <h2 class="heading">About us</h2>
+    
+    <p class="about-us-p">
+      Where Ambition Meets Performance! Born from our passion for empowering athletes, 
+      we provide top-quality supplements to fuel your journey. Success isn’t just about talent—it’s about
+      discipline, dedication, and the right support. Our science-backed products help you train harder,
+      recover faster, and perform at your best. Gear up with us and take your game to the next level!
+    </p>
+
+    <div class="features-container">
+      <div class="feature-box">
+          <h3>Free Shipping</h3>
+          <p>On All Orders Over 1500 EGP</p>
+      </div>
+      <div class="feature-box">
+          <h3>Easy Returns</h3>
+          <p>14 Day Returns Policy</p>
+      </div>
+      <div class="feature-box">
+          <h3>Secure Payment</h3>
+          <p>100% Secure Guarantee</p>
+      </div>
+      <div class="feature-box">
+          <h3>Special Support</h3>
+          <p>24/7 Dedicated Support</p>
+      </div>
+  </div>
+
+</body>
+      <footer class="footer">
+          all rights reserved © 2025
+      </footer>
+</html>

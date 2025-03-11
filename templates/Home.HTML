@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/css/Home.css">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'js/bootstrap.bundle.min.js')}}">
+</head>
+<body>
+  
+  
+  <header>
+    <h6 class="head">Shop Now</h6>
+  </header>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{url_for('Home')}}" style="color: rgb(180, 27, 0);"><span class="branding-navbar">Prime</span> supplements</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('Home')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('Shop')}}">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('about')}}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('login')}}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('register')}}">Sign-Up</a>
+              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <hr>
+
+    <h1 class="Home-Title">Welome to our Home page</h1>
+
+
+
+    <div class="maindifferencediv">
+      <div class="features">
+          <div class="feature">
+              <h3><span class="brand">Prime</span> | Pure Effective Ingredients</h3>
+              <p>Lab Tested & Certified</p>
+          </div>
+          <div class="feature">
+            <h3><span class="brand">Prime</span> | Comprehensive Formulas</h3>
+            <p>Packed with Proven Ingredients</p>
+        </div>
+        <div class="feature">
+            <h3><span class="brand">Prime</span> | No Filler Ingredients</h3>
+            <p>Just Pure Effective Ingredients</p>
+        </div>
+        <div class="feature">
+            <h3> <span class="brand">Prime</span> | Backed by Doctors</h3>
+            <p>Trusted By Medical Professionals</p>
+        </div>
+      </div>
+  </div>
+<div class = "Pre-last-container">
+  <div class ="NewsLetter-container">
+    <div class="Main-Title">
+      <h1 class="Main-Title">Newsletter</h1>
+    </div>
+      <div class="description">
+        <p class="description">
+          Subscribe for store updates and discounts.
+        </p>
+      </div>
+      <div class="last-row">
+      <div class="enter-email">
+        <input type="email" placeholder="Email address" class="emailme" required>
+      </div>
+      <div class="newsletter-btn">
+        <button type="submit" class="subscribe">Subscribe</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+</body>
+      <footer class="footer">
+          all rights reserved © 2025
+      </footer>
+
+</html>
