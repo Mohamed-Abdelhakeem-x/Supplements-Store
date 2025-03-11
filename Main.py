@@ -22,7 +22,7 @@ def Shop():
 def login():
    form = LoginForm()
    if form.validate_on_submit():
-       if form.email.data == "admin" and form.password.data == "admin":
+       if form.email.data == "mohamed.abdelhakeem@gmail.com" and form.password.data == "123456":
             flash("Form submitted successfully!", "success")
             return redirect(url_for("Home"))
        else:

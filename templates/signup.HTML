@@ -49,42 +49,92 @@
       </nav>
       <hr>
 
-    <h1 class="signup-page-title">Welome to our Sign-Up page</h1>
-    
-    <form action="/login" method="POST">
-      {{form.hidden_tag()}}
-      
-      <div class="container">
-        
-        <h1>Sign-Up</h1>
-        
-        <p>Please fill in this form to create an account.</p>
-        
-        <hr>
-        
-        <label for="username"><b>{{ form.username.label }}</b></label>
-        {{ form.username(id="username-field", class="input-field", placeholder="Enter Username") }}
-
-        <label for="email"><b>{{ form.email.label }}</b></label>
-        {{ form.email(id="email-register-field", class="input-field", placeholder="Enter Email") }}
-
-        <label for="Mobile Number"><b>{{ form.phone.label }}</b></label>
-        {{ form.phone(id="phone-field", class="input-field", placeholder="(+20) 123-456-789") }}
-
-        <label for="psw"><b>{{ form.password.label }}</b></label>
-        {{ form.password(id="password-register-field", class="input-field", placeholder="Enter Password") }}    
-        
-        <label for="psw-repeat"><b>{{ form.confirm_password.label }}</b></label>
-        {{ form.confirm_password(id="confirm-password-field", class="input-field", placeholder="Repeat Password") }}
-
-        {{ form.submit(id="register-button", class="registerbtn") }}
-        </div>
-    
-      <div class="container signin">
-        <p>Already have an account? <a href="{{url_for('login')}}"><span class="url-for-signin">Sign in</span></a>.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}} text-center">
+          {{message}}
       </div>
+      {% endfor %}
+  
+      {% endif %}
+      {% endwith %}
+
+      <div class="container mt-auto align-items-center">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Create an Account</legend>
     
-    </form>
+                
+                <div class="form-group">
+                    {{ form.username.label(class='form-control-label')}}
+                    {% if form.username.errors%}
+                    {{ form.username(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class='form-control form-control-lg')}}
+                    {% endif %}
+    
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class='form-control-label')}}
+                    {% if form.email.errors%}
+                    {{ form.email(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class='form-control form-control-lg')}}
+                    {% endif %}
+    
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class='form-control-label')}}
+                    {% if form.password.errors%}
+                    {{ form.password(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class='form-control form-control-lg')}}
+                    {% endif %}
+    
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class='form-control-label')}}
+                    {% if form.confirm_password.errors%}
+                    {{ form.confirm_password(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class='form-control form-control-lg')}}
+                    {% endif %}
+    
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class='btn btn-outline-info')}}
+                </div>
+            </fieldset>
+        </form>
+        <div class="broder-top pt-3">
+            <small class="text-muted">
+                Already have an Account?
+                <a href="{{url_for('login')}}" class="ml-2">Sign in</a>
+            </small>
+        </div>
+    </div>
 
 </body>
 

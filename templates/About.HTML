@@ -45,6 +45,17 @@
       </nav>
       <hr>
 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}} text-center">
+          {{message}}
+      </div>
+      {% endfor %}
+  
+      {% endif %}
+      {% endwith %}
+
     <h2 class="heading">About us</h2>
     
     <p class="about-us-p">
