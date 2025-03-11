@@ -35,7 +35,8 @@ def register():
    if form.validate_on_submit():
       flash(f"Account created for {form.username.data}!", "success")
       return redirect(url_for("login"))
-   
+   else:
+         flash('Invalid Credential', 'danger')
    return render_template('signup.HTML',form=form)
 
 if __name__ == "__main__":
