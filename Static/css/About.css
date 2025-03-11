@@ -5,16 +5,17 @@
 }
 
 .about-us-p {
- font-family: Arial, Helvetica, sans-serif;
- align-items: center;  
- opacity: 0.7;
- color: black;
- width: 70%;  
- margin: 0 auto;    
- text-align: center; 
- font-size: large;
- font-style: italic;
- margin-bottom: 50px;
+display: flex;
+flex: fixed; 
+align-items: center;
+margin: 0 auto;
+margin-bottom: 50px; 
+font-family: Arial, Helvetica, sans-serif;
+opacity: 0.7;
+color: black;
+width: 70%;
+font-size: large;
+font-style: italic;
 }
 
 .head{
