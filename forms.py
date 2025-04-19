@@ -16,9 +16,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField("Remember me")
     login = SubmitField("Login")
 
-
 class adminForm(FlaskForm):
     email = StringField("Email Address", validators=[DataRequired(), Email()])
     password = PasswordField("Password" , validators=[DataRequired(), Length(min=6, max=80) ])
     key = StringField("Position Key", validators=[DataRequired(), Length(min = 7, max = 7)])
     remember = BooleanField("Remember me")
+
+
