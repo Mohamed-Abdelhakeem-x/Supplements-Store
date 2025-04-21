@@ -26,5 +26,3 @@ class CartForm(FlaskForm):
     title = StringField('Item Name', validators=[DataRequired()])
     completed = BooleanField('Completed')
     submit = SubmitField('Add Order')
-
-    
