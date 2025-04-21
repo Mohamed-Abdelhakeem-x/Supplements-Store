@@ -3,10 +3,11 @@ from forms import RegisterForm, LoginForm, CartForm
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+
+db = SQLAlchemy(app)
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,17 +28,28 @@ def about():
 
 @app.route("/Shop")
 def Shop():
-    return render_template('Shop.HTML', title = "Shop", cssFile = "Static/css/Shop.css")
+    form = CartForm()
+    if form.validate_on_submit():
+        new_Order = Order(title=form.title.data, completed=form.completed.data)
+        db.session.add(new_Order)
+        db.session.commit()
+        return redirect(url_for('Cart'))
+    return render_template('Shop.HTML', title = "Shop", cssFile = "Static/css/Shop.css", form=form)
 
-@app.route('/Cart', methods=['GET', 'POST'])
+@app.route('/Cart')
+def tasks_list():
+    tasks = Order.query.all()
+    return render_template('Cart.html', tasks=tasks)
+
+@app.route('/Order', methods=['GET', 'POST'])
 def add_task():
     form = CartForm()
     if form.validate_on_submit():
-        new_task = Task(title=form.title.data, completed=form.completed.data)
-        db.session.add(new_task)
+        new_Order = Order(title=form.title.data, completed=form.completed.data)
+        db.session.add(new_Order)
         db.session.commit()
-        return redirect(url_for('tasks_list'))
-    return render_template('Cart.html', form=form)
+        return redirect(url_for('Cart'))
+    return render_template('Order.html', form=form)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -60,5 +72,7 @@ def register():
          flash('Invalid Credential', 'danger')
    return render_template('signup.HTML',form=form)
 
+
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
+
