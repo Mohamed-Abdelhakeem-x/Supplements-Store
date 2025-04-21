@@ -22,4 +22,9 @@ class adminForm(FlaskForm):
     key = StringField("Position Key", validators=[DataRequired(), Length(min = 7, max = 7)])
     remember = BooleanField("Remember me")
 
+class CartForm(FlaskForm):
+    title = StringField('Item Name', validators=[DataRequired()])
+    completed = BooleanField('Completed')
+    submit = SubmitField('Add Order')
 
+    

@@ -1,9 +1,20 @@
 from flask import Flask, render_template , redirect, url_for, flash
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, CartForm
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
+db = SQLAlchemy(app)
 
+app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 @app.route("/Home", methods=['GET','POST'])
@@ -17,6 +28,16 @@ def about():
 @app.route("/Shop")
 def Shop():
     return render_template('Shop.HTML', title = "Shop", cssFile = "Static/css/Shop.css")
+
+@app.route('/Cart', methods=['GET', 'POST'])
+def add_task():
+    form = CartForm()
+    if form.validate_on_submit():
+        new_task = Task(title=form.title.data, completed=form.completed.data)
+        db.session.add(new_task)
+        db.session.commit()
+        return redirect(url_for('tasks_list'))
+    return render_template('Cart.html', form=form)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
