@@ -43,7 +43,7 @@
                   {% if session.get('user_id') %}
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Welcome,{{ session['username'] }}
+                      Welcome, <span style="color:rgb(180, 27, 0);">{{ session['username'] }}</span>
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -60,6 +60,7 @@
                       <a class="nav-link" href="{{ url_for('register') }}">Sign Up</a>
                     </li>
                   {% endif %}
+
                     </ul>
                   </li>
                 </ul>
