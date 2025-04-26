@@ -29,6 +29,7 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
 
     # Relationship for template access, if desired
     user = db.relationship('User', backref=db.backref('reviews', lazy=True))
@@ -83,14 +84,17 @@ def reviews():
             return redirect(url_for('login'))
         review = Review(
             user_id=session['user_id'],
+            title=form.title.data.strip(),
             content=form.content.data.strip(),
         )
         db.session.add(review)
         db.session.commit()
         flash('Review added!', 'success')
         return redirect(url_for('reviews'))
-    all_reviews = Review.query.order_by(Review.id.desc()).all()
-    return render_template('Review.html', form=form, reviews=all_reviews)
+    user_reviews = []
+    if 'user_id' in session:
+        user_reviews = Review.query.filter_by(user_id=session['user_id']).order_by(Review.id.desc()).all()
+    return render_template('Review.html', form=form, reviews=user_reviews)
 
 @app.route('/reviews/edit/<int:review_id>', methods=['GET', 'POST'])
 def edit_review(review_id):
@@ -103,6 +107,7 @@ def edit_review(review_id):
         return redirect(url_for('reviews'))
     form = ReviewForm(obj=review)
     if form.validate_on_submit():
+        review.title = form.title.data.strip()
         review.content = form.content.data.strip()
         db.session.commit()
         flash('Review updated!', 'success')

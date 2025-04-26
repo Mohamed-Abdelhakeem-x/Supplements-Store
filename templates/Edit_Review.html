@@ -5,7 +5,7 @@
 
 {%block head%} 
 
-<link rel="stylesheet" href="#">
+<link rel="stylesheet" href="/static/css/Cart.css">
 
 {% endblock %}
 
@@ -15,13 +15,23 @@
     <h3>Edit Your Review</h3>
     <form method="POST">
       {{ form.csrf_token }}
+
       <div class="form-group">
-        {{ form.content.label }}<br>
+        {{ form.title.label }}
+        {{ form.title(class_="form-control") }}
+        {% for error in form.title.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="form-group mt-2">
+        {{ form.content.label }}
         {{ form.content(class_="form-control", rows="3") }}
         {% for error in form.content.errors %}
         <div class="text-danger">{{ error }}</div>
         {% endfor %}
       </div>
+
       <div class="form-group mt-2">
         {{ form.submit(class_="btn btn-primary") }}
         <a href="{{ url_for('reviews') }}" class="btn btn-secondary">Cancel</a>
