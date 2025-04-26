@@ -136,12 +136,18 @@ def CartPage():
 
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
-    if 'session_id' in session:
+    cart = None
+    # Prefer user cart if signed in.
+    if 'user_id' in session:
+        user_id = session['user_id']
+        cart = Cart.query.filter_by(user_id=user_id).first()
+    elif 'session_id' in session:
         session_id = session['session_id']
         cart = Cart.query.filter_by(session_id=session_id).first()
-        if cart:
-            CartItem.query.filter_by(cart_id=cart.id).delete()
-            db.session.commit()
+    
+    if cart:
+        CartItem.query.filter_by(cart_id=cart.id).delete()
+        db.session.commit()
     return redirect(url_for('CartPage'))
 
 #------------------------------------------------------------------------------------------------

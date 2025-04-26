@@ -21,9 +21,16 @@
       <p class="product-description">{{ product.description }}</p>
       <p class="product-description">${{ product.price }}</p>
 
+      {% if session.get('user_id') %}
       <a href="{{ url_for('add_to_cart', product_id=product.id) }}">
         <button class="add-to-cart-btn">Add to cart</button>
       </a>
+      {% else %}
+      <a href="{{ url_for('login') }}">
+        <button class="add-to-cart-btn" title="Please log in to add items to cart">Add to cart</button>
+      </a>
+      {% endif %}
+      
     </div>
   {% endfor %}
 
