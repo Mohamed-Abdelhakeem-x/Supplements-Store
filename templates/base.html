@@ -46,7 +46,7 @@
                       Welcome, <span style="color:rgb(180, 27, 0);">{{ session['username'] }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('reviews') }}">Reviews</a></li>
                       <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sign out</a></li>
                     </ul>
                     <li class="nav-item">

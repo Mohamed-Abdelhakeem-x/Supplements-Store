@@ -1,5 +1,5 @@
 from flask import Flask, render_template , redirect, url_for, flash, session
-from forms import RegisterForm, LoginForm, CartForm
+from forms import RegisterForm, LoginForm, CartForm, ReviewForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import uuid
@@ -24,6 +24,17 @@ class User(db.Model):
     phone = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+    # Relationship for template access, if desired
+    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
+
+#------------------------------------------------------------------------------------------------
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -45,6 +56,7 @@ class CartItem(db.Model):
     cart = db.relationship('Cart', backref=db.backref('items', lazy=True))
     product = db.relationship('Product')
 
+#------------------------------------------------------------------------------------------------
 
 with app.app_context():
      db.create_all()
@@ -59,6 +71,57 @@ def Home():
 @app.route("/About")
 def about():
     return render_template('About.HTML', title = "About", cssFile = "Static/css/About.css")
+
+#------------------------------------------------------------------------------------------------
+
+@app.route('/Reviews', methods=['GET', 'POST'])
+def reviews():
+    form = ReviewForm()
+    if form.validate_on_submit():
+        if 'user_id' not in session:
+            flash('You must be logged in to post a review.', 'danger')
+            return redirect(url_for('login'))
+        review = Review(
+            user_id=session['user_id'],
+            content=form.content.data.strip(),
+        )
+        db.session.add(review)
+        db.session.commit()
+        flash('Review added!', 'success')
+        return redirect(url_for('reviews'))
+    all_reviews = Review.query.order_by(Review.id.desc()).all()
+    return render_template('Review.html', form=form, reviews=all_reviews)
+
+@app.route('/reviews/edit/<int:review_id>', methods=['GET', 'POST'])
+def edit_review(review_id):
+    review = Review.query.get_or_404(review_id)
+    if 'user_id' not in session:
+        flash('You must be logged in to edit reviews.', 'danger')
+        return redirect(url_for('login'))
+    if review.user_id != session['user_id']:
+        flash('You are not allowed to edit this review.', 'danger')
+        return redirect(url_for('reviews'))
+    form = ReviewForm(obj=review)
+    if form.validate_on_submit():
+        review.content = form.content.data.strip()
+        db.session.commit()
+        flash('Review updated!', 'success')
+        return redirect(url_for('reviews'))
+    return render_template('edit_review.html', form=form, review=review)
+
+@app.route('/reviews/delete/<int:review_id>', methods=['POST'])
+def delete_review(review_id):
+    review = Review.query.get_or_404(review_id)
+    if 'user_id' not in session:
+        flash('You must be logged in to delete reviews.', 'danger')
+        return redirect(url_for('login'))
+    if review.user_id != session['user_id']:
+        flash('You are not allowed to delete this review.', 'danger')
+        return redirect(url_for('reviews'))
+    db.session.delete(review)
+    db.session.commit()
+    flash('Review deleted.', 'info')
+    return redirect(url_for('reviews'))
 
 #------------------------------------------------------------------------------------------------
 
