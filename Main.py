@@ -72,7 +72,7 @@ def add_to_cart(product_id):
         db.session.add(cart_item)
 
     db.session.commit()
-    return redirect(url_for('shop'))
+    return redirect(url_for('Shop'))
 
 @app.route('/create_products')
 def create_products():
@@ -87,7 +87,7 @@ def create_products():
             Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png"),
             Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png"),
             Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png"),
-        ]
+            ]
         db.session.add_all(products)
         db.session.commit()
         return "Products created!"
@@ -95,8 +95,31 @@ def create_products():
         return "Products already exist!"
 
 @app.route('/Cart')
-def Cart():
-    return render_template('Cart.Html')
+def CartPage():
+    if 'session_id' not in session:
+        cart_items = []
+        total = 0.0
+    else:
+        session_id = session['session_id']
+        cart = Cart.query.filter_by(session_id=session_id).first()
+        if cart:
+            cart_items = CartItem.query.filter_by(cart_id=cart.id).all()
+            total = sum(item.product.price * item.quantity for item in cart_items)
+        else:
+            cart_items = []
+            total = 0.0
+    return render_template('Cart.Html', cart_items=cart_items, total=total)
+
+@app.route('/clear_cart', methods=['POST'])
+def clear_cart():
+    if 'session_id' in session:
+        session_id = session['session_id']
+        cart = Cart.query.filter_by(session_id=session_id).first()
+        if cart:
+            # Delete all items in the user's cart
+            CartItem.query.filter_by(cart_id=cart.id).delete()
+            db.session.commit()
+    return redirect(url_for('CartPage'))
 
 @app.route('/login', methods=['GET','POST'])
 def login():
