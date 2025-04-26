@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} Cart {% endblock %}
+
+{%block head%}
+
+<link rel="stylesheet" href="/static/css/Cart.css">
+
+{% endblock %}
+
+{% block content%}
+
+<section class="h-100 h-custom" style="background-color: #eee;">
+<div class="container p-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-lg-8">
+                            <div class="p-5 pb-1 pl-4 pr-5">
+                            </div>
+                            <div class="p-5">
+                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                    <h4 class="fw-bold mb-0 text-black">Shopping Cart</h4>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Cart items -->
+
+                                <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                    <div class="col-12">
+                                        <div class="ul-container">  
+                                            <ul>
+
+                                            </ul>
+                                        </div>  
+                                        <p>Your shopping cart is empty.</p>
+                                    </div>
+                                </div>
+                                
+                                <a href="https://www.paypal.me/hakeem4reall" class="paypal-button">
+                                    <i class="fab fa-paypal"></i> Pay with PayPal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{%endblock%}

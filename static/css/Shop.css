@@ -22,11 +22,12 @@
     padding: 15px;
 }
 
-.product-photo{
-    width: 100%;
-    display: block;
+.product-photo {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    height: 180px; 
+    margin-bottom: 10px; 
 }
 
 .product-name{

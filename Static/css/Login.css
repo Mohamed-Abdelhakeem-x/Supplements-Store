@@ -91,3 +91,101 @@ a {
 .branding-navbar{
   font-weight: bold;
 }
+
+
+
+
+
+
+
+body {
+  background: white;
+  color: #fff;
+}
+
+.container {
+  background: white;
+  border-color: rgb(180, 27, 0) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  color: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+}
+
+legend {
+  color: rgb(180, 27, 0);
+  font-weight: bold;
+}
+
+.form-control,
+.form-control:focus {
+  background:white;
+  color: #fff;
+  border: 1px solid rgb(180, 27, 0);
+  box-shadow: none;
+}
+
+.form-control-label {
+  color: rgb(180, 27, 0);
+  font-weight: 500;
+}
+
+.is-invalid, .is-invalid:focus {
+  border-color: rgb(180, 27, 0);
+  background: white;
+  color: #fff;
+}
+
+.invalid-feedback span {
+  color: rgb(255, 78, 56);
+  font-weight: bold;
+}
+
+.btn {
+  background: rgb(180, 27, 0) !important;
+  border-color: rgb(180, 27, 0) !important;
+  color: #fff !important;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.btn:hover,
+.btn:focus {
+  background: #ffffff !important;
+  color: rgb(180, 27, 0) !important;
+  border-color: rgb(180, 27, 0) !important;
+}
+
+
+.form-check-input {
+  accent-color: rgb(180, 27, 0);
+  background-color: white;
+  border: 1px solid rgb(180, 27, 0);
+}
+.form-check-input-label {
+  color: rgb(180, 27, 0);
+  margin-left: 0.5rem;
+}
+
+a, a:visited, .text-muted a {
+  color: rgb(180, 27, 0);
+  text-decoration: underline;
+}
+
+.text-muted,
+.text-muted a {
+  color: #ccc !important;
+}
+
+
+.small, small {
+  color: #000000 !important;
+  display: block;
+  margin-top: 1rem;
+}
+
+small.text-muted .ml-2 {
+  color: #000 !important;
+}
+small.text-muted .ml-2:visited {
+  color: #000 !important;
+}

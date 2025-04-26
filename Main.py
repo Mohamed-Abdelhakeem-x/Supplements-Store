@@ -1,21 +1,38 @@
-from flask import Flask, render_template , redirect, url_for, flash
+from flask import Flask, render_template , redirect, url_for, flash, session
 from forms import RegisterForm, LoginForm, CartForm
 from flask_sqlalchemy import SQLAlchemy
+import uuid
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '124pofds12h413knf13pomo5'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+app.config['SECRET_KEY'] = '123 456 789'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Orders.db'
 db = SQLAlchemy(app)
 
-class Order(db.Model):
+class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable=False)
-    completed = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(100))
+    description = db.Column(db.String(200))
+    price = db.Column(db.Float)
+    image_url = db.Column(db.String(300))
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    session_id = db.Column(db.String(100))
+
+class CartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    quantity = db.Column(db.Integer, default=1)
+
+    cart = db.relationship('Cart', backref=db.backref('items', lazy=True))
+    product = db.relationship('Product')
+
 
 with app.app_context():
-    db.create_all()
+     db.create_all()
 
 @app.route('/')
 @app.route("/Home", methods=['GET','POST'])
@@ -28,28 +45,58 @@ def about():
 
 @app.route("/Shop")
 def Shop():
-    form = CartForm()
-    if form.validate_on_submit():
-        new_Order = Order(title=form.title.data, completed=form.completed.data)
-        db.session.add(new_Order)
+    products = Product.query.all()
+    return render_template('Shop.html', products=products)
+
+@app.route('/add_to_cart/<int:product_id>')
+def add_to_cart(product_id):
+    # Create session id if not exist
+    if 'session_id' not in session:
+        session['session_id'] = str(uuid.uuid4())
+
+    session_id = session['session_id']
+
+    # Get or create cart
+    cart = Cart.query.filter_by(session_id=session_id).first()
+    if not cart:
+        cart = Cart(session_id=session_id)
+        db.session.add(cart)
         db.session.commit()
-        return redirect(url_for('Cart'))
-    return render_template('Shop.HTML', title = "Shop", cssFile = "Static/css/Shop.css", form=form)
+
+    # Get or create cart item
+    cart_item = CartItem.query.filter_by(cart_id=cart.id, product_id=product_id).first()
+    if cart_item:
+        cart_item.quantity += 1
+    else:
+        cart_item = CartItem(cart_id=cart.id, product_id=product_id, quantity=1)
+        db.session.add(cart_item)
+
+    db.session.commit()
+    return redirect(url_for('shop'))
+
+@app.route('/create_products')
+def create_products():
+    # Only create if no products exist
+    if Product.query.count() == 0:
+        products = [
+            Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png"),
+            Product(name="B Complex", description="Essential B Vitamins", price=44.99, image_url="/static/images/B-Complex.png"),
+            Product(name="Fiber", description="Promote Digestive Health", price=44.99, image_url="/static/images/Fiber.png"),
+            Product(name="Liver", description="Support Optimal Liver Health", price=44.99, image_url="/static/images/Liver.png"),
+            Product(name="Multi Mineral", description="Support Healthy Bones and Joints", price=44.99, image_url="/static/images/MultiMineral.png"),
+            Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png"),
+            Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png"),
+            Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png"),
+        ]
+        db.session.add_all(products)
+        db.session.commit()
+        return "Products created!"
+    else:
+        return "Products already exist!"
 
 @app.route('/Cart')
-def tasks_list():
-    tasks = Order.query.all()
-    return render_template('Cart.html', tasks=tasks)
-
-@app.route('/Order', methods=['GET', 'POST'])
-def add_task():
-    form = CartForm()
-    if form.validate_on_submit():
-        new_Order = Order(title=form.title.data, completed=form.completed.data)
-        db.session.add(new_Order)
-        db.session.commit()
-        return redirect(url_for('Cart'))
-    return render_template('Order.html', form=form)
+def Cart():
+    return render_template('Cart.Html')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -68,8 +115,6 @@ def register():
    if form.validate_on_submit():
       flash(f"Account created for {form.username.data}!", "success")
       return redirect(url_for("login"))
-   else:
-         flash('Invalid Credential', 'danger')
    return render_template('signup.HTML',form=form)
 
 
