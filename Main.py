@@ -56,14 +56,12 @@ def add_to_cart(product_id):
 
     session_id = session['session_id']
 
-    # Get or create cart
     cart = Cart.query.filter_by(session_id=session_id).first()
     if not cart:
         cart = Cart(session_id=session_id)
         db.session.add(cart)
         db.session.commit()
 
-    # Get or create cart item
     cart_item = CartItem.query.filter_by(cart_id=cart.id, product_id=product_id).first()
     if cart_item:
         cart_item.quantity += 1
