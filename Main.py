@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import uuid
 
+#------------------------------------------------------------------------------------------------
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '123 456 789'
