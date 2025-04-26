@@ -1,6 +1,7 @@
 from flask import Flask, render_template , redirect, url_for, flash, session
 from forms import RegisterForm, LoginForm, CartForm
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 import uuid
 
 app = Flask(__name__)
@@ -9,6 +10,17 @@ app.config['SECRET_KEY'] = '123 456 789'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Orders.db'
 db = SQLAlchemy(app)
+
+bcrypt = Bcrypt(app)
+
+#------------------------------------------------------------------------------------------------
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    phone = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +32,7 @@ class Product(db.Model):
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     session_id = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,6 +47,8 @@ class CartItem(db.Model):
 with app.app_context():
      db.create_all()
 
+#------------------------------------------------------------------------------------------------
+
 @app.route('/')
 @app.route("/Home", methods=['GET','POST'])
 def Home():
@@ -43,6 +58,8 @@ def Home():
 def about():
     return render_template('About.HTML', title = "About", cssFile = "Static/css/About.css")
 
+#------------------------------------------------------------------------------------------------
+
 @app.route("/Shop")
 def Shop():
     products = Product.query.all()
@@ -50,17 +67,22 @@ def Shop():
 
 @app.route('/add_to_cart/<int:product_id>')
 def add_to_cart(product_id):
-    # Create session id if not exist
-    if 'session_id' not in session:
-        session['session_id'] = str(uuid.uuid4())
-
-    session_id = session['session_id']
-
-    cart = Cart.query.filter_by(session_id=session_id).first()
-    if not cart:
-        cart = Cart(session_id=session_id)
-        db.session.add(cart)
-        db.session.commit()
+    if 'user_id' in session:
+        user_id = session['user_id']
+        cart = Cart.query.filter_by(user_id=user_id).first()
+        if not cart:
+            cart = Cart(user_id=user_id)
+            db.session.add(cart)
+            db.session.commit()
+    else:
+        if 'session_id' not in session:
+            session['session_id'] = str(uuid.uuid4())
+        session_id = session['session_id']
+        cart = Cart.query.filter_by(session_id=session_id).first()
+        if not cart:
+            cart = Cart(session_id=session_id)
+            db.session.add(cart)
+            db.session.commit()
 
     cart_item = CartItem.query.filter_by(cart_id=cart.id, product_id=product_id).first()
     if cart_item:
@@ -74,7 +96,6 @@ def add_to_cart(product_id):
 
 @app.route('/create_products')
 def create_products():
-    # Only create if no products exist
     if Product.query.count() == 0:
         products = [
             Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png"),
@@ -94,18 +115,21 @@ def create_products():
 
 @app.route('/Cart')
 def CartPage():
-    if 'session_id' not in session:
-        cart_items = []
-        total = 0.0
-    else:
+    if 'user_id' in session:
+        user_id = session['user_id']
+        cart = Cart.query.filter_by(user_id=user_id).first()
+    elif 'session_id' in session:
         session_id = session['session_id']
         cart = Cart.query.filter_by(session_id=session_id).first()
-        if cart:
-            cart_items = CartItem.query.filter_by(cart_id=cart.id).all()
-            total = sum(item.product.price * item.quantity for item in cart_items)
-        else:
-            cart_items = []
-            total = 0.0
+    else:
+        cart = None
+
+    if cart:
+        cart_items = CartItem.query.filter_by(cart_id=cart.id).all()
+        total = sum(item.product.price * item.quantity for item in cart_items)
+    else:
+        cart_items = []
+        total = 0.0
     return render_template('Cart.Html', cart_items=cart_items, total=total)
 
 @app.route('/clear_cart', methods=['POST'])
@@ -114,31 +138,55 @@ def clear_cart():
         session_id = session['session_id']
         cart = Cart.query.filter_by(session_id=session_id).first()
         if cart:
-            # Delete all items in the user's cart
             CartItem.query.filter_by(cart_id=cart.id).delete()
             db.session.commit()
     return redirect(url_for('CartPage'))
 
-@app.route('/login', methods=['GET','POST'])
+#------------------------------------------------------------------------------------------------
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-   form = LoginForm()
-   if form.validate_on_submit():
-       if form.email.data == "mohamed.abdelhakeem@gmail.com" and form.password.data == "123456":
-            flash("Logged in successfully!", "success")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data.strip()).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            session['user_id'] = user.id
+            session['username'] = user.username
+            flash(f"Logged in successfully! Welcome {user.username}", "success")
             return redirect(url_for("Home"))
-       else:
+        else:
             flash("Invalid email or password.", "danger")
-   return render_template('login.HTML', form=form)
+    return render_template('login.HTML', form=form)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
    form = RegisterForm()
    if form.validate_on_submit():
-      flash(f"Account created for {form.username.data}!", "success")
-      return redirect(url_for("login"))
-   return render_template('signup.HTML',form=form)
+        if User.query.filter_by(email=form.email.data.strip()).first():
+            flash("Email already registered. Please log in.", "danger")
+            return render_template('signup.HTML', form=form)
+        if User.query.filter_by(phone=form.phone.data.strip()).first():
+            flash("Phone number already registered. Please log in.", "danger")
+            return render_template('signup.HTML', form=form)
+        hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(
+            username=form.username.data.strip(),
+            email=form.email.data.strip(),
+            phone=form.phone.data.strip(),
+            password=hashed_pw
+        )
+        db.session.add(user)
+        db.session.commit()
+        flash(f"Account created for {form.username.data}!", "success")
+        return redirect(url_for("login"))
+   return render_template('signup.HTML', form=form)
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash("Signed out.", "info")
+    return redirect(url_for('Home'))
+#------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
-
