@@ -107,7 +107,7 @@ def edit_review(review_id):
         db.session.commit()
         flash('Review updated!', 'success')
         return redirect(url_for('reviews'))
-    return render_template('edit_review.html', form=form, review=review)
+    return render_template('Edit_Review.html', form=form, review=review)
 
 @app.route('/reviews/delete/<int:review_id>', methods=['POST'])
 def delete_review(review_id):
