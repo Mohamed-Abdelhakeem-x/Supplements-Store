@@ -137,7 +137,6 @@ def CartPage():
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
     cart = None
-    # Prefer user cart if signed in.
     if 'user_id' in session:
         user_id = session['user_id']
         cart = Cart.query.filter_by(user_id=user_id).first()
