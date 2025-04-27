@@ -439,3 +439,35 @@ body {
         padding: 10px;
     }
 }
+
+.telegram-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0088cc;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    
+    width: 300px;
+    margin: 20px auto;
+    
+    transition: background-color 0.3s ease;
+  }
+  
+  .telegram-button:hover {
+    background-color: #006699;
+  }
+  
+  .telegram-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  
