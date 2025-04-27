@@ -10,47 +10,137 @@
 
 {% block content%}
 
-    <h1 class="Home-Title">Welome to our Store</h1>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="/static/images/HomePageBanner.jpeg" alt="First slide" >
+            </div>
+        </div>
+    </div>
+    
+    <!--ABOUT US SECTION-->
+    <br />
+    <div class="about-us mt-2">
+        <div class="container">
+            <p class="siteName"> Prime Supplements</p>
+            <p class="siteDesc">
+              Prime Supplements is a specialized store dedicated to helping athletes reach their peak 
+              performance with a wide range of high-quality products. From protein powders and amino acids to pre-workouts, 
+              recovery formulas, and vitamins, Prime Supplements offers everything athletes need to build strength, 
+              boost endurance, and support overall wellness. With expert staff providing personalized guidance and a
+              welcoming atmosphere, Prime Supplements is more than just a store — it's a trusted partner in every athlete’s
+              journey to success.
+            </p>
+        </div>
+    </div>
+    
+    <br />
+    
+    
+    <!--CATEGORY TITLE-->
+    <div class="category">
+        <div class="container">
+            <p class="categoryName justify-center text-center" style="display: flex; justify-content:center;"> Our products</p>
+        </div>
+    </div>
+    
+    
 
-    <div class="maindifferencediv">
-      <div class="features">
-          <div class="feature">
-              <h3><span class="brand">Prime</span> | Pure Effective Ingredients</h3>
-              <p>Lab Tested & Certified</p>
-          </div>
-          <div class="feature">
-            <h3><span class="brand">Prime</span> | Comprehensive Formulas</h3>
-            <p>Packed with Proven Ingredients</p>
+
+
+    <!---CATEGORIES--->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border h-100 card-format">
+                    <img src="/static/images/FirstCardsPhoto.png" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">New</h4>
+                        <div class="card-text justify-center">
+                            <p>Be among the first to experience our newest Products.</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{url_for('Shop')}}" class="btn btn-primary" style="background-color:rgb(180, 27, 0); border-color:rgb(180, 27, 0);">Browse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border h-100 card-format">
+                    <img src="/static/images/SecondCardsPhoto.jpeg" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Popular</h4>
+                        <div class="card-text justify-center">
+                            <p>Join the countless individuals who have fallen in love with our quality.</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{url_for('Shop')}}" class="btn btn-primary" style="background-color:rgb(180, 27, 0); border-color:rgb(180, 27, 0);">Browse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border h-100 card-format">
+                    <img src="/static/images/ThirdCardsPhoto.png" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Special</h4>
+                        <div class="card-text justify-center">
+                            <p>Experience the magic and delight in the unforgettable Health that await you.</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{url_for('Shop')}}" class="btn btn-primary" style="background-color:rgb(180, 27, 0); border-color:rgb(180, 27, 0);">Browse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="feature">
-            <h3><span class="brand">Prime</span> | No Filler Ingredients</h3>
-            <p>Just Pure Effective Ingredients</p>
-        </div>
-        <div class="feature">
-            <h3> <span class="brand">Prime</span> | Backed by Doctors</h3>
-            <p>Trusted By Medical Professionals</p>
-        </div>
-      </div>
-  </div>
-<div class = "Pre-last-container">
-  <div class ="NewsLetter-container">
-    <div class="Main-Title">
-      <h1 class="Main-Title">Newsletter</h1>
     </div>
-      <div class="description">
-        <p class="description">
-          Subscribe for store updates and discounts.
-        </p>
-      </div>
-      <div class="last-row">
-      <div class="enter-email">
-        <input type="email" placeholder="Email address" class="emailme" required>
-      </div>
-      <div class="newsletter-btn">
-        <button type="submit" class="subscribe">Subscribe</button>
+    
+    <!--VISION AND MISSION-->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="about-us">
+                <div class="container p-5">
+                    <p class="siteName">Vision</p>
+                    <p class="siteDesc">At Prime Supplements, our vision is to empower athletes and fitness enthusiasts to reach their full potential with top-quality supplements and expert guidance. We aim to be a trusted destination for those seeking better performance, faster recovery, and a healthier lifestyle, building a strong community driven by passion, integrity, and results.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="about-us">
+                <div class="container p-5">
+                    <p class="siteName">Mission</p>
+                    <p class="siteDesc">At Prime Supplements, our mission is to provide athletes and fitness enthusiasts with the highest quality supplements, trusted advice, and unmatched service. We are committed to helping every customer find the right products to support their goals, improve their performance, and enhance their overall well-being, while creating a welcoming community focused on growth, strength, and success.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+<!--Hot Deals-->
+{% if session.get('user_id') %}
+<div class="member m-5">
+  <div class="container">
+      <p class="memberTitle" style="display: flex; justify-content: center;">Hot Deals</p>
+      <p class="text-center" style="color: #666; display:block;">Unlock exclusive benefits and discounts by becoming part of our community.</p>
   </div>
 </div>
+{% else %}
+<div class="member m-5">
+  <div class="container">
+      <p class="memberTitle" style="display: flex; justify-content: center;">Hot Deals</p>
+      <p class="text-center" style="color: #666; display:block;">Unlock exclusive benefits and discounts by becoming part of our community.</p>
+  </div>
+  <div class="text-center">
+      <a href="{{url_for('login')}}" class="btn btn-primary" style="background-color:rgb(180, 27, 0); border-color: rgb(180, 27, 0);">Login Now!</a>
+  </div>
+</div>
+{% endif %}
 
 {%endblock%}
