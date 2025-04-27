@@ -2,14 +2,11 @@
 
 {% block title %} Cart {% endblock %}
 
-{%block head%}
-
-<link rel="stylesheet" href="/static/css/Cart.css">
-
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Cart.css') }}">
 {% endblock %}
 
-{% block content%}
-
+{% block content %}
 <section class="h-100 h-custom" style="background-color: #eee;">
     <div class="container p-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -18,17 +15,17 @@
                     <div class="card-body p-0">
                         <div class="row g-0">
                             <div class="col-lg-8">
-                                <div class="p-5 pb-1 pl-4 pr-5">
-                                </div>
+                                <!-- Empty padding row for top spacing (optional) -->
+                                <div class="p-5 pb-1 pl-4 pr-5"></div>
                                 <div class="p-5">
                                     <div class="d-flex justify-content-between align-items-center mb-5">
                                         <h4 class="fw-bold mb-0 text-black">
-                                          Shopping Cart
-                                          {% if session.get('user_id') %}
-                                            <span style="font-size:1rem; color:rgb(180,27,0); margin-left:1rem;">
-                                                for {{ session['username'] }}
-                                            </span>
-                                          {% endif %}
+                                            Shopping Cart
+                                            {% if current_user.is_authenticated %}
+                                                <span style="font-size:1rem; color:rgb(180,27,0); margin-left:6px;">
+                                                    for {{ current_user.username }}
+                                                </span>
+                                            {% endif %}
                                         </h4>
                                         {% if cart_items and cart_items|length > 0 %}
                                         <form method="POST" action="{{ url_for('clear_cart') }}">
@@ -36,39 +33,35 @@
                                         </form>
                                         {% endif %}
                                     </div>
-    
                                     <hr class="my-4">
-    
                                     <!-- Cart items -->
                                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                                         <div class="col-12">
                                             <div class="ul-container">  
                                                 <ul>
-                                                    {% if cart_items and cart_items|length > 0 %}
-                                                      {% for item in cart_items %}
+                                                {% if cart_items and cart_items|length > 0 %}
+                                                    {% for item in cart_items %}
                                                         <li style="margin-bottom: 1rem;">
-                                                          <div class="d-flex align-items-center">
-                                                              <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" width="50" height="50" style="margin-right: 1rem;">
-                                                              <div>
-                                                                  <strong>{{ item.product.name }}</strong> — {{ item.product.description or '' }}<br>
-                                                                  Quantity: {{ item.quantity }}<br>
-                                                                  Price: ${{ "%.2f"|format(item.product.price) }} x {{ item.quantity }} = <strong>${{ "%.2f"|format(item.product.price * item.quantity) }}</strong>
-                                                              </div>
-                                                          </div>
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" width="50" height="50" style="margin-right: 1rem;">
+                                                                <div>
+                                                                    <strong>{{ item.product.name }}</strong> — {{ item.product.description or '' }}<br>
+                                                                    Quantity: {{ item.quantity }}<br>
+                                                                    Price: ${{ "%.2f"|format(item.product.price) }} x {{ item.quantity }} = <strong>${{ "%.2f"|format(item.product.price * item.quantity) }}</strong>
+                                                                </div>
+                                                            </div>
                                                         </li>
-                                                      {% endfor %}
-                                                    {% else %}
-                                                      <li>Your shopping cart is empty.</li>
-                                                    {% endif %}
-                                                  </ul>
-                                                  
-                                                  {% if cart_items and cart_items|length > 0 %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li>Your shopping cart is empty.</li>
+                                                {% endif %}
+                                                </ul>
+                                                {% if cart_items and cart_items|length > 0 %}
                                                     <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
-                                                  {% endif %}
+                                                {% endif %}
                                             </div>  
                                         </div>
                                     </div>
-                                    
                                     <!-- PayPal Button -->
                                     {% if total > 0 %}
                                     <a href="https://www.paypal.me/hakeem4reall/{{ '%.2f'|format(total) }}" class="paypal-button" target="_blank">
@@ -82,12 +75,10 @@
                                 </div>
                             </div>
                         </div>
-    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </section>
-
-{%endblock%}
+</section>
+{% endblock %}

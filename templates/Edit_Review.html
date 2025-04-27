@@ -2,15 +2,11 @@
 
 {% block title %} Edit Review {% endblock %}
 
-
-{%block head%} 
-
-<link rel="stylesheet" href="/static/css/Cart.css">
-
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Cart.css') }}">
 {% endblock %}
 
-{% block content%}
-
+{% block content %}
 <div class="container my-5">
     <h3>Edit Your Review</h3>
     <form method="POST">
@@ -37,6 +33,5 @@
         <a href="{{ url_for('reviews') }}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
-  </div>
-
-  {%endblock%}
+</div>
+{% endblock %}

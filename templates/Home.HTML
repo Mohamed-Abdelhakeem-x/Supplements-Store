@@ -124,7 +124,7 @@
     </div>
 
 <!--Hot Deals-->
-{% if session.get('user_id') %}
+{% if current_user.is_authenticated %}
 <div class="member m-5">
   <div class="container">
       <p class="memberTitle" style="display: flex; justify-content: center;">Hot Deals</p>

@@ -2,6 +2,7 @@ from flask import Flask, render_template , redirect, url_for, flash, session
 from forms import RegisterForm, LoginForm, CartForm, ReviewForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import uuid
 
 #------------------------------------------------------------------------------------------------
@@ -10,14 +11,24 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '123 456 789'
 
+#------------------------------------------------------------------------------------------------
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Orders.db'
 db = SQLAlchemy(app)
+
+#------------------------------------------------------------------------------------------------
 
 bcrypt = Bcrypt(app)
 
 #------------------------------------------------------------------------------------------------
 
-class User(db.Model):
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+#------------------------------------------------------------------------------------------------
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -30,11 +41,6 @@ class Review(db.Model):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     user = db.relationship('User', backref=db.backref('reviews', lazy=True))
-
-    # Relationship for template access, if desired
-    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
-
-#------------------------------------------------------------------------------------------------
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,6 +63,9 @@ class CartItem(db.Model):
     cart = db.relationship('Cart', backref=db.backref('items', lazy=True))
     product = db.relationship('Product')
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 #------------------------------------------------------------------------------------------------
 
 with app.app_context():
@@ -76,14 +85,12 @@ def about():
 #------------------------------------------------------------------------------------------------
 
 @app.route('/Reviews', methods=['GET', 'POST'])
+@login_required
 def reviews():
     form = ReviewForm()
     if form.validate_on_submit():
-        if 'user_id' not in session:
-            flash('You must be logged in to post a review.', 'danger')
-            return redirect(url_for('login'))
         review = Review(
-            user_id=session['user_id'],
+            user_id=current_user.id,
             title=form.title.data.strip(),
             content=form.content.data.strip(),
         )
@@ -91,38 +98,41 @@ def reviews():
         db.session.commit()
         flash('Review added!', 'success')
         return redirect(url_for('reviews'))
-    user_reviews = []
-    if 'user_id' in session:
-        user_reviews = Review.query.filter_by(user_id=session['user_id']).order_by(Review.id.desc()).all()
+    
+    user_reviews = Review.query.filter_by(user_id=current_user.id).order_by(Review.id.desc()).all()
     return render_template('Review.html', form=form, reviews=user_reviews)
 
-@app.route('/reviews/edit/<int:review_id>', methods=['GET', 'POST'])
+
+@app.route('/edit_review/<int:review_id>', methods=['GET', 'POST'])
+@login_required
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)
-    if 'user_id' not in session:
-        flash('You must be logged in to edit reviews.', 'danger')
-        return redirect(url_for('login'))
-    if review.user_id != session['user_id']:
-        flash('You are not allowed to edit this review.', 'danger')
+    if review.user_id != current_user.id:
+        flash('You can only edit your own reviews.', 'danger')
         return redirect(url_for('reviews'))
-    form = ReviewForm(obj=review)
+    
+    form = ReviewForm()
     if form.validate_on_submit():
         review.title = form.title.data.strip()
         review.content = form.content.data.strip()
         db.session.commit()
         flash('Review updated!', 'success')
         return redirect(url_for('reviews'))
+    
+    form.title.data = review.title
+    form.content.data = review.content
     return render_template('Edit_Review.html', form=form, review=review)
 
+
 @app.route('/reviews/delete/<int:review_id>', methods=['POST'])
+@login_required
 def delete_review(review_id):
     review = Review.query.get_or_404(review_id)
-    if 'user_id' not in session:
-        flash('You must be logged in to delete reviews.', 'danger')
-        return redirect(url_for('login'))
-    if review.user_id != session['user_id']:
+    
+    if review.user_id != current_user.id:
         flash('You are not allowed to delete this review.', 'danger')
         return redirect(url_for('reviews'))
+    
     db.session.delete(review)
     db.session.commit()
     flash('Review deleted.', 'info')
@@ -184,6 +194,7 @@ def create_products():
         return "Products already exist!"
 
 @app.route('/Cart')
+@login_required
 def CartPage():
     if 'user_id' in session:
         user_id = session['user_id']
@@ -203,6 +214,7 @@ def CartPage():
     return render_template('Cart.Html', cart_items=cart_items, total=total)
 
 @app.route('/clear_cart', methods=['POST'])
+@login_required
 def clear_cart():
     cart = None
     if 'user_id' in session:
@@ -225,8 +237,8 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.strip()).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
             session['user_id'] = user.id
-            session['username'] = user.username
             flash(f"Logged in successfully! Welcome {user.username}", "success")
             return redirect(url_for("Home"))
         else:
@@ -257,11 +269,13 @@ def register():
    return render_template('signup.HTML', form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
-    session.clear()
+    logout_user()
     flash("Signed out.", "info")
     return redirect(url_for('Home'))
 #------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True,port=3000)
+
