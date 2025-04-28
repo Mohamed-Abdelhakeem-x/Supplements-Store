@@ -66,10 +66,32 @@ class CartItem(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 #------------------------------------------------------------------------------------------------
 
-with app.app_context():
-     db.create_all()
+def init_db():
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        
+        # Check if products already exist
+        if Product.query.count() == 0:
+            products = [
+                Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png"),
+                Product(name="B Complex", description="Essential B Vitamins", price=44.99, image_url="/static/images/B-Complex.png"),
+                Product(name="Fiber", description="Promote Digestive Health", price=44.99, image_url="/static/images/Fiber.png"),
+                Product(name="Liver", description="Support Optimal Liver Health", price=44.99, image_url="/static/images/Liver.png"),
+                Product(name="Multi Mineral", description="Support Healthy Bones and Joints", price=44.99, image_url="/static/images/MultiMineral.png"),
+                Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png"),
+                Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png"),
+                Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png"),
+            ]
+            db.session.add_all(products)
+            db.session.commit()
+            print("Database initialized with products!")
+
+# Initialize the database when the application starts
+init_db()
 
 #------------------------------------------------------------------------------------------------
 
