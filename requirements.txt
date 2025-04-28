@@ -4,3 +4,4 @@ WTForms
 Flask-SQLAlchemy
 Flask-Bcrypt
 Flask-Login
+email-validator
