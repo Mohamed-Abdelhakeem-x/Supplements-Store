@@ -265,7 +265,7 @@ def login():
             return redirect(url_for("Home"))
         else:
             flash("Invalid email or password.", "danger")
-    return render_template('login.HTML', form=form)
+    return render_template('login.html', form=form)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
