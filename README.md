@@ -51,7 +51,7 @@ A fully functional, blueprint-based Flask web application for an online suppleme
 ## 📥 Installation Guide
 
 ### 1. Clone the Repository
-git clone https://github.com/yourusername/supplements-store.git
+git clone https://github.com/yourusername/supplements-store.git](https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store
 cd supplements-store
 
 ### 2. Clone the Repository
