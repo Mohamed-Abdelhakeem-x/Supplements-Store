@@ -53,7 +53,7 @@ A fully functional, blueprint-based Flask web application for an online suppleme
 ### 1. Clone the Repository
 git clone https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store
 
-### 2. Clone the Repository
+### 2. Create a Virtual Environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
