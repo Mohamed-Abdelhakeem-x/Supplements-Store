@@ -13,4 +13,4 @@ ENV FLASK_RUN_PORT=3000
 
 EXPOSE 3000
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=3000"]
