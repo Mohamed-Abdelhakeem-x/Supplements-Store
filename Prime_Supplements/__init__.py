@@ -37,7 +37,7 @@ def init_db():
 
 init_db()
 
-# Import routes after initializing app to avoid circular imports
+
 from Prime_Supplements.Main.routes import main
 from Prime_Supplements.users.routes import users
 from Prime_Supplements.Review.routes import Reviews 
