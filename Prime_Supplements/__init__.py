@@ -15,8 +15,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Delay model import to break circular dependency
-# Models will import db and login_manager from this module
 
 def init_db():
     from Prime_Supplements.models import Product
