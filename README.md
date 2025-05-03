@@ -1,81 +1,87 @@
-# Prime Supplements 🏋️‍♂️🧴
+# Prime Supplements
 
-**Prime Supplements** is a full-stack Flask-based e-commerce web application for browsing, reviewing, and purchasing nutritional supplements.  
-This project includes features like product search and filtering, shopping cart management, user authentication, product reviews, and more.
+**Prime Supplements** is a full-stack e-commerce web application built with Flask using the **Blueprint design pattern** to ensure modular, scalable, and organized code structure. The platform allows users to browse health supplements, manage a shopping cart, register/login securely, and write reviews.
 
----
+## 🧠 Features
 
-## 🚀 Features
+- 🛒 Product browsing, searching, filtering by category
+- 🧾 Shopping cart system (session-based for guests, user-based for logged-in users)
+- 🔐 User registration, login, and session management using Flask-Login and bcrypt
+- 🗣️ Authenticated users can add, edit, and delete their own product reviews
+- 💬 Flash messaging for feedback on user actions
+- 📦 Product data creation with category-based organization
+- 📁 Modular architecture using Flask Blueprints
 
-- User registration, login, and logout
-- Product browsing, search, and filtering by category
-- Individual product pages with related item suggestions
-- Shopping cart functionality (session-based or user-based)
-- Product reviews (CRUD operations)
-- Admin product seeding
-- Responsive UI with Bootstrap
-
----
-
-## 🛠️ Tech Stack
+## 💡 Technologies Used
 
 ### Backend
-- Python 3.11
+- Python
 - Flask
-- Flask-WTF
-- Flask-SQLAlchemy
-- Flask-Bcrypt
+- Flask Blueprints (modular structure)
 - Flask-Login
+- Flask-Bcrypt
+- Flask-WTF / WTForms
+- Flask-SQLAlchemy
+- SQLite (local development database)
 
 ### Frontend
-- HTML5
-- CSS3
-- Bootstrap 5
+- HTML
+- CSS
+- Bootstrap
 
----
+### Deployment
+- Docker
+- Docker Hub
 
-## 🐳 Docker
+## 🚀 Getting Started
 
-You can run the app using Docker:
+1. **Clone the repository**  
+```bash
+git clone https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store.git
+cd Supplements-Store
+```
 
+2. **Install dependencies**  
+```bash
+pip install -r requirements.txt
+```
+
+3. **Run the app**  
+```bash
+flask run
+```
+
+4. **Or run via Docker**  
 ```bash
 docker pull mohamedabdelhakeem/prime-supplements
 docker run -p 3000:3000 mohamedabdelhakeem/prime-supplements
 ```
 
----
-
-## 📂 Project Structure (Simplified)
+## 📂 Project Structure
 
 ```
 Prime_Supplements/
-├── Main/
-├── cart/
-├── users/
-├── Review/
-├── templates/
-├── static/
-│   └── css/
-├── models.py
-├── __init__.py
+│
+├── Main/           # Home, About, and Shop routes
+├── users/          # Registration, login, logout
+├── cart/           # Cart logic and cart pages
+├── Review/         # User review system
+├── models.py       # SQLAlchemy models
+├── forms/          # WTForms for auth, cart, and reviews
+├── templates/      # HTML pages
+├── static/         # CSS, JS, Images
 ```
 
----
+## 📸 Screenshots
 
-## 🧪 Initialize Database
-
-On first run, the app seeds a list of sample products into the database.
-
----
+(Add your screenshots here)
 
 ## 🔗 Links
 
-- **Docker Hub**: [`mohamedabdelhakeem/prime-supplements`](https://hub.docker.com/r/mohamedabdelhakeem/prime-supplements)
-- **GitHub Repo**: [Supplements Store](https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store)
+- 🐙 GitHub: [Supplements-Store](https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store)
+- 🐳 Docker Hub: [`mohamedabdelhakeem/prime-supplements`](https://hub.docker.com/r/mohamedabdelhakeem/prime-supplements)
 
----
+## 👨‍💻 Author
 
-## 📃 License
-
-MIT License. Feel free to use and modify!
-
+**Mohamed Abdelhakeem**  
+An aspiring full-stack developer passionate about building modern, scalable web applications.
