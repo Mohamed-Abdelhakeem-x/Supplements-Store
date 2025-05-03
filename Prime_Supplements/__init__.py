@@ -23,14 +23,14 @@ def init_db():
         
         if Product.query.count() == 0:
             products = [
-                Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png"),
-                Product(name="B Complex", description="Essential B Vitamins", price=44.99, image_url="/static/images/B-Complex.png"),
-                Product(name="Fiber", description="Promote Digestive Health", price=44.99, image_url="/static/images/Fiber.png"),
-                Product(name="Liver", description="Support Optimal Liver Health", price=44.99, image_url="/static/images/Liver.png"),
-                Product(name="Multi Mineral", description="Support Healthy Bones and Joints", price=44.99, image_url="/static/images/MultiMineral.png"),
-                Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png"),
-                Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png"),
-                Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png"),
+                Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png", category="Digestive Health"),
+                Product(name="B Complex", description="Essential B Vitamins", price=44.99, image_url="/static/images/B-Complex.png", category="Vitamins"),
+                Product(name="Fiber", description="Promote Digestive Health", price=44.99, image_url="/static/images/Fiber.png", category="Digestive Health"),
+                Product(name="Liver", description="Support Optimal Liver Health", price=44.99, image_url="/static/images/Liver.png", category="Organ Support"),
+                Product(name="Multi Mineral", description="Support Healthy Bones and Joints", price=44.99, image_url="/static/images/MultiMineral.png", category="Minerals"),
+                Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png", category="Vitamins"),
+                Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png", category="Organ Support"),
+                Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png", category="Heart Health"),
             ]
             db.session.add_all(products)
             db.session.commit()

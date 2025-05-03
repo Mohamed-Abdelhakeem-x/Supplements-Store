@@ -1,6 +1,5 @@
-from datetime import datetime
 from Prime_Supplements import db
-from flask_login import UserMixin, LoginManager
+from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +21,7 @@ class Product(db.Model):
     description = db.Column(db.String(200))
     price = db.Column(db.Float)
     image_url = db.Column(db.String(300))
+    category = db.Column(db.String(50))
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)

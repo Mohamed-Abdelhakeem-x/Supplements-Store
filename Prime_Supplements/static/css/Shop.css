@@ -73,3 +73,64 @@
 .branding-navbar{
     font-weight: bold;
 } 
+
+.shop-filters {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.search-filter-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.search-container, .category-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input, .category-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.search-input {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.search-button, .filter-button {
+    background-color: rgb(180, 27, 0);
+    border: solid;
+    border-color: rgb(180, 27, 0);
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover, .filter-button:hover {
+    background-color:white;
+    color:rgb(180, 27, 0);
+    border: solid;
+    border-color: rgb(180, 27, 0);
+}
+
+.no-products-found {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-size: 18px;
+    margin-top: 100px;
+    margin-bottom: 170px;
+}
