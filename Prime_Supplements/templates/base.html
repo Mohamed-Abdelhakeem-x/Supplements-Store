@@ -32,7 +32,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.Home') }}">Home</a>
                     </li>
@@ -42,6 +42,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,7 +57,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('cart.CartPage') }}">Cart</a>
                         </li>
-                    {% else %}
+                    {% endif %}
+                    {% if not current_user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
                         </li>
@@ -68,7 +71,8 @@
         </div>
     </nav>
     <hr>
-
+    
+    <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}

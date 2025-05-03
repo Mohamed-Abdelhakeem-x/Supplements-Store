@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Edit Review Section -->
 <div class="container my-5">
     <h3>Edit Your Review</h3>
     <form method="POST">
       {{ form.csrf_token }}
-
+<!-- Review Title -->
       <div class="form-group">
         {{ form.title.label }}
         {{ form.title(class_="form-control") }}
@@ -20,6 +22,7 @@
         {% endfor %}
       </div>
 
+<!-- Review Content -->
       <div class="form-group mt-2">
         {{ form.content.label }}
         {{ form.content(class_="form-control", rows="3") }}
@@ -28,10 +31,12 @@
         {% endfor %}
       </div>
 
+<!-- Submit Button -->
       <div class="form-group mt-2">
         {{ form.submit(class_="btn btn-primary") }}
         <a href="{{ url_for('Reviews.reviews') }}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
 </div>
+
 {% endblock %}
