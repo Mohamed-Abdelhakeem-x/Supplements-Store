@@ -46,3 +46,8 @@ def Shop():
     return render_template('Shop.html', products=products, categories=categories, 
                            current_search=search_query, current_category=category_filter)
 
+@main.route('/product/<int:product_id>')
+def product_description(product_id):
+    product = Product.query.get_or_404(product_id)
+    related_products = Product.query.filter(Product.category == product.category).filter(Product.id != product_id).limit(4).all()
+    return render_template('product_description.html', product=product, related_products=related_products)

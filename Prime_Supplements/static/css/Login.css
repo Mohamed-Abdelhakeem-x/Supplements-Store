@@ -166,11 +166,6 @@ legend {
   margin-left: 0.5rem;
 }
 
-a, a:visited, .text-muted a {
-  color: rgb(180, 27, 0);
-  text-decoration: underline;
-}
-
 .text-muted,
 .text-muted a {
   color: #ccc !important;
