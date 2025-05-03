@@ -85,3 +85,10 @@ Prime_Supplements/
 
 **Mohamed Abdelhakeem**  
 An aspiring full-stack developer passionate about building modern, scalable web applications.
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+---
+
+**Feel free to contribute and enhance the project! 🚀**
