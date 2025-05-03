@@ -74,7 +74,7 @@ Prime_Supplements/
 
 ## 📸 Screenshots
 
-(Add your screenshots here)
+
 
 ## 🔗 Links
 
