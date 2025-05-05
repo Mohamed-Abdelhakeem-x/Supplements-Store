@@ -71,10 +71,10 @@ Prime_Supplements/
 ```
 
 ## 📸 Screenshots
-![Homepage Screenshots](screenshots/HomePage.png)
-![ShoppingPage Screenshots](screenshots/ShoppingPage.png)
-![CartPage Screenshots](screenshots/CartPage.png)
-![LoginPage Screenshots](screenshots/LoginPage.png)
+![Home Page](Screenshots/HomePage.png)
+![Login Page](Screenshots/LoginPage.png)
+![Shopping Page](Screenshots/ShoppingPage.png)
+![Cart Page](Screenshots/CartPage.png)
 
 ## 🔗 Links
 
