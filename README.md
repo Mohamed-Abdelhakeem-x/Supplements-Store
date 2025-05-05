@@ -1,4 +1,4 @@
-# Prime Supplements
+![image](https://github.com/user-attachments/assets/a1128786-79d8-49d7-9d69-1216364dfa07)# Prime Supplements
 
 **Prime Supplements** is a full-stack e-commerce web application built with Flask using the **Blueprint design pattern** to ensure modular, scalable, and organized code structure. The platform allows users to browse health supplements, manage a shopping cart, register/login securely, and write reviews.
 
@@ -73,8 +73,10 @@ Prime_Supplements/
 ```
 
 ## 📸 Screenshots
-
-
+![Homepage Screenshot](https://i.imgur.com/yourimage.png)
+![Cartpage Screenshot](https://i.imgur.com/yourimage.png)
+![Loginpage Screenshot](https://imgur.com/a/uXoKdwH)
+![Shoppingpage Screenshot](https://i.imgur.com/yourimage.png)
 
 ## 🔗 Links
 
