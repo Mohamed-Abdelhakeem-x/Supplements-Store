@@ -71,7 +71,6 @@ Prime_Supplements/
 ```
 
 ## 📸 Screenshots
-![Home Page](Screenshots/HomePage.png)
 ![Login Page](Screenshots/LoginPage.png)
 ![Shopping Page](Screenshots/ShoppingPage.png)
 ![Cart Page](Screenshots/CartPage.png)
