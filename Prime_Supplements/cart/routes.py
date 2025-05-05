@@ -10,7 +10,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import uuid
 
 
-
 @cart.route('/add_to_cart/<int:product_id>')
 def add_to_cart(product_id):
     if 'user_id' in session:
