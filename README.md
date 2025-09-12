@@ -83,7 +83,7 @@ Prime_Supplements/
 ## 👨‍💻 Author
 
 **Mohamed Abdelhakeem**  
-An aspiring full-stack developer passionate about building modern, scalable web applications.
+An aspiring full-stack engineer passionate about building modern, scalable web applications.
 
 ## 📝 License
 
