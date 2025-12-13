@@ -34,12 +34,16 @@
 
 ## 🧪 Testing
 
-The project employs a comprehensive testing strategy ensuring high reliability and code quality.
+The project employs a comprehensive testing strategy ensuring **100% Code Coverage** and high reliability.
 
 ### Strategy
 1.  **Unit Tests** (`tests/unit`): Verify service layer logic (cart calculations, validations) in isolation.
 2.  **Integration Tests** (`tests/integration`): Test HTTP routes, database interactions, and user flows.
 3.  **UI/System Tests** (`tests/ui`): End-to-end tests using **Selenium WebDriver** to simulate real user behavior (Chrome).
+
+### Quality Assurance
+- **100% Code Coverage**: Every line of code, including error handlers and edge cases, is covered by tests.
+- **Regression Safety**: The robust suite enables confident refactoring and feature additions.
 
 ### Running Tests
 To run the full test suite and view coverage:
@@ -48,8 +52,8 @@ coverage run --branch --source=Prime_Supplements -m pytest tests/
 coverage report -m
 ```
 
-### Dashboard
-A custom **Test Automation Dashboard** is available to visualize results and view failure screenshots.
+### Automation Dashboard
+A custom **Test Automation Dashboard** is available to visualize results, track build history, and view failure screenshots.
 ```bash
 python test_dashboard/app.py
 ```
@@ -92,6 +96,9 @@ Prime_Supplements/
 ├── forms/          # WTForms for auth, cart, and reviews
 ├── templates/      # HTML pages
 ├── static/         # CSS, JS, Images
+│
+tests/              # Test Suite (Unit, Integration, UI)
+test_dashboard/     # Automated Test Dashboard
 ```
 
 ## 📸 Screenshots

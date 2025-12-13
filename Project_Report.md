@@ -20,7 +20,10 @@ The project follows a modular structure:
     - **`users/`**: Authentication and user profile logic.
     - **`cart/`**: Shopping cart business logic.
     - **`Review/`**: Review management system.
-- **`tests/`**: Comprehensive test suite mirroring the application structure.
+    - **`templates/`**: HTML templates.
+    - **`static/`**: CSS, JS, and image assets.
+- **`tests/`**: Comprehensive test suite (Unit, Integration, UI).
+- **`test_dashboard/`**: Automated testing dashboard.
 
 ## 3. Testing Strategy
 A "Testing Pyramid" approach was adopted to ensure a balanced and efficient test suite. This strategy prioritizes a large base of fast unit tests, supported by a layer of integration tests, and capped with fewer, high-fidelity UI tests.
@@ -68,16 +71,12 @@ Code coverage is a critical metric used to assess the thoroughness of the test s
 
 ### Quantitative Results
 According to the final coverage analysis:
-- **Overall Coverage**: **98%**
-- **Missed Statements**: Only **4** lines of code out of hundreds were missed.
-- **100% Coverage Areas**: Core modules including `Main`, `Review`, `cart` (forms/init), and `models.py` achieved full coverage.
+- **Overall Coverage**: **100%**
+- **Missed Statements**: **0** lines of code missed.
+- **100% Coverage Areas**: All modules including `Main`, `Review`, `cart`, `users`, and `models.py` achieved full coverage.
 
 ### Qualitative Analysis
-The remaining unmeasured 2% largely correlates to:
-- **Defensive Coding**: `try/except` blocks handling rare database connection errors that are difficult to simulate in a standard test environment.
-- **Defensive Branches**: Edge case `if` conditions that theoretically shouldn't be reached in a stable system state.
-
-The 98% figure indicates an extremely high level of confidence in the system's logic.
+The 100% figure indicates an extremely high level of confidence in the system's logic, including edge cases and error handling paths.
 
 ## 7. Dashboard Explanation
 To visualize test results and make them accessible to non-technical stakeholders, a custom **Test Automation Dashboard** was developed (`test_dashboard/app.py`).
@@ -90,7 +89,7 @@ To visualize test results and make them accessible to non-technical stakeholders
 
 ## 8. Results & Discussion
 The implementation of this comprehensive QA strategy yielded significant benefits:
-- **High Reliability**: The 98% coverage ensures that almost every logic path has been verified.
+- **High Reliability**: The 100% coverage ensures that every logic path has been verified.
 - **Regression Safety**: The automated suite allows for safe refactoring. Developers can modify code with confidence, knowing that the tests will catch any unintended side effects.
 - **Documentation**: The tests themselves serve as living documentation of how the system is expected to behave.
 
