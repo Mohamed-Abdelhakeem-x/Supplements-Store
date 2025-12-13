@@ -22,7 +22,7 @@ def client():
             db.drop_all()
 
 @pytest.fixture
-def init_database():
+def init_database(client):
     # Create initial data for tests
     hashed_pw = bcrypt.generate_password_hash('password123').decode('utf-8')
     user = User(username="testuser", email="test@example.com", phone="12345678901", password=hashed_pw)

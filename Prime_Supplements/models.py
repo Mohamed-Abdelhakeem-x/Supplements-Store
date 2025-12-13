@@ -56,10 +56,3 @@ class CartItem(db.Model):
 
     cart = db.relationship('Cart', backref=db.backref('items', lazy=True))
     product = db.relationship('Product')
-
-
-
-
-
-
-
