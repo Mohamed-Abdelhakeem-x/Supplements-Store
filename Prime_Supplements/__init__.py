@@ -23,6 +23,7 @@ def init_db():
         
         if Product.query.count() == 0:
             products = [
+                # Original Products
                 Product(name="Gut Health+", description="Improve Digestion", price=44.99, image_url="/static/images/GutHealth+.png", category="Digestive Health"),
                 Product(name="B Complex", description="Essential B Vitamins", price=44.99, image_url="/static/images/B-Complex.png", category="Vitamins"),
                 Product(name="Fiber", description="Promote Digestive Health", price=44.99, image_url="/static/images/Fiber.png", category="Digestive Health"),
@@ -31,6 +32,11 @@ def init_db():
                 Product(name="Multi Vitamin", description="Provide Essential Micronutrients", price=44.99, image_url="/static/images/MultiVitamin.png", category="Vitamins"),
                 Product(name="Thyroid Support", description="Keep Thyroid Operating at Optimal Rate", price=44.99, image_url="/static/images/ThyroidSupport.png", category="Organ Support"),
                 Product(name="Omega 3", description="Support Cardiovascular Health", price=44.99, image_url="/static/images/Omega3.png", category="Heart Health"),
+                # New Products
+                Product(name="Zinc Picolinate", description="Highly Bioavailable Zinc for Immune Support", price=19.99, image_url="/static/images/MultiMineral.png", category="Minerals"),
+                Product(name="Magnesium Glycinate", description="Relaxation and Muscle Recovery", price=24.99, image_url="/static/images/MultiMineral.png", category="Minerals"),
+                Product(name="Vitamin D3+K2", description="Bone Health and Immune Support", price=29.99, image_url="/static/images/MultiVitamin.png", category="Vitamins"),
+                Product(name="Whey Protein Isolate", description="Fast Absorbing Protein for Muscle Growth", price=59.99, image_url="/static/images/GutHealth+.png", category="Protein"),
             ]
             db.session.add_all(products)
             db.session.commit()

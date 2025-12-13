@@ -31,6 +31,30 @@
 - Docker
 - Docker Hub
 
+
+## 🧪 Testing
+
+The project employs a comprehensive testing strategy ensuring high reliability and code quality.
+
+### Strategy
+1.  **Unit Tests** (`tests/unit`): Verify service layer logic (cart calculations, validations) in isolation.
+2.  **Integration Tests** (`tests/integration`): Test HTTP routes, database interactions, and user flows.
+3.  **UI/System Tests** (`tests/ui`): End-to-end tests using **Selenium WebDriver** to simulate real user behavior (Chrome).
+
+### Running Tests
+To run the full test suite and view coverage:
+```bash
+coverage run --branch --source=Prime_Supplements -m pytest tests/
+coverage report -m
+```
+
+### Dashboard
+A custom **Test Automation Dashboard** is available to visualize results and view failure screenshots.
+```bash
+python test_dashboard/app.py
+```
+Access at `http://localhost:5001`.
+
 ## 🚀 Getting Started
 
 1. **Clone the repository**  
