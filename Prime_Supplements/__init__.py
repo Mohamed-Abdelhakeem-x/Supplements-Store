@@ -6,7 +6,11 @@ from flask_login import LoginManager
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '123 456 789'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Orders.db'
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Go up one level to project root, then into instance
+# Or just put it in instance explicitly
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, '..', 'instance', 'Orders.db')
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -41,7 +45,7 @@ def init_db():
             db.session.add_all(products)
             db.session.commit()
 
-# init_db()
+init_db()
 
 
 from Prime_Supplements.Main.routes import main
