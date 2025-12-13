@@ -35,7 +35,7 @@ def init_db():
             db.session.add_all(products)
             db.session.commit()
 
-init_db()
+# init_db()
 
 
 from Prime_Supplements.Main.routes import main

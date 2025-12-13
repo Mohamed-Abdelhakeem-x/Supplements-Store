@@ -8,12 +8,21 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+    def check_password(self, password_input):
+        from Prime_Supplements import bcrypt
+        return bcrypt.check_password_hash(self.password, password_input)
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     user = db.relationship('User', backref=db.backref('reviews', lazy=True))
+
+    def validate_content(self):
+        if len(self.content) < 5 or len(self.content) > 500:
+            return False
+        return True
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,10 +32,21 @@ class Product(db.Model):
     image_url = db.Column(db.String(300))
     category = db.Column(db.String(50))
 
+    def get_stock_status(self):
+        # Simulated stock logic
+        return True
+
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     session_id = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+
+    def calculate_total(self):
+        return sum(item.product.price * item.quantity for item in self.items)
+
+    def is_empty(self):
+        return len(self.items) == 0
+
 
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)

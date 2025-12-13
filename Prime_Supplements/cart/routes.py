@@ -59,7 +59,6 @@ def create_products():
         return "Products already exist!"
 
 @cart.route('/Cart')
-@login_required
 def CartPage():
     if 'user_id' in session:
         user_id = session['user_id']
@@ -79,7 +78,6 @@ def CartPage():
     return render_template('Cart.Html', cart_items=cart_items, total=total)
 
 @cart.route('/clear_cart', methods=['POST'])
-@login_required
 def clear_cart():
     cart = None
     if 'user_id' in session:

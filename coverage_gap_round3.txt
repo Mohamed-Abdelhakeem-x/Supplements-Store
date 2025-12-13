@@ -1,0 +1,17 @@
+﻿Name                                   Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------
+Prime_Supplements\Main\__init__.py         3      0      0      0   100%
+Prime_Supplements\Main\routes.py          32      5      4      1    83%   19, 38, 51-53
+Prime_Supplements\Review\__init__.py       3      0      0      0   100%
+Prime_Supplements\Review\forms.py          7      0      0      0   100%
+Prime_Supplements\Review\routes.py        49     10      8      1    77%   37-38, 56-65
+Prime_Supplements\__init__.py             34      1      2      0    97%   56
+Prime_Supplements\cart\__init__.py         3      0      0      0   100%
+Prime_Supplements\cart\forms.py            6      0      0      0   100%
+Prime_Supplements\cart\routes.py          71     16     24      8    68%   18->32, 23->25, 27->32, 34, 44-59, 67-71, 77-78, 88-90, 92->95
+Prime_Supplements\models.py               45      0      2      0   100%
+Prime_Supplements\users\__init__.py        3      0      0      0   100%
+Prime_Supplements\users\forms.py          15      0      0      0   100%
+Prime_Supplements\users\routes.py         42      3     10      2    90%   34-35, 47
+----------------------------------------------------------------------------------
+TOTAL                                    313     35     50     12    85%

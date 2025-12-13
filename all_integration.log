@@ -1,0 +1,101 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\7akee\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.13.9', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.6.0'}, 'Plugins': {'html': '4.1.1', 'metadata': '3.1.1'}}
+rootdir: C:\Personal\Projects\Django\Supplements-Store
+plugins: html-4.1.1, metadata-3.1.1
+collecting ... collected 4 items
+
+tests/integration/test_flows.py::test_home_page PASSED                   [ 25%]
+tests/integration/test_flows.py::test_register_and_login_flow PASSED     [ 50%]
+tests/integration/test_flows.py::test_add_to_cart_and_checkout_flow FAILED [ 75%]
+tests/integration/test_flows.py::test_database_crud_product PASSED       [100%]
+
+================================== FAILURES ===================================
+_____________________ test_add_to_cart_and_checkout_flow ______________________
+
+client = <FlaskClient <Flask 'Prime_Supplements'>>
+init_database = <SQLAlchemy sqlite:///C:\Personal\Projects\Django\Supplements-Store\instance\Orders.db>
+
+    def test_add_to_cart_and_checkout_flow(client, init_database):
+        """
+        Test adding items to cart and clearing it (Checkout simulation).
+        Integration: Tests Product -> Cart -> CartItem -> DB Relationship.
+        """
+        # Login first
+>       client.post('/login', data={'email': 'test@example.com', 'password': 'hashedpassword'}) # Password hash mismatch in fixture?
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_flows.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\test.py:1167: in post
+    return self.open(*args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\testing.py:235: in open
+    response = super().open(
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\test.py:1116: in open
+    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\test.py:988: in run_wsgi_app
+    rv = run_wsgi_app(self.application, environ, buffered=buffered)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\test.py:1264: in run_wsgi_app
+    app_rv = app(environ, start_response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:1536: in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:1514: in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:1511: in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:919: in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:917: in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py:902: in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Prime_Supplements\users\routes.py:17: in login
+    if user and bcrypt.check_password_hash(user.password, form.password.data):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <flask_bcrypt.Bcrypt object at 0x0000021F45484830>
+pw_hash = b'hashedpassword', password = b'hashedpassword'
+
+    def check_password_hash(self, pw_hash, password):
+        '''Tests a password hash against a candidate password. The candidate
+        password is first hashed and then subsequently compared in constant
+        time to the existing hash. This will either return `True` or `False`.
+    
+        Example usage of :class:`check_password_hash` would look something
+        like this::
+    
+            pw_hash = bcrypt.generate_password_hash('secret', 10)
+            bcrypt.check_password_hash(pw_hash, 'secret') # returns True
+    
+        :param pw_hash: The hash to be compared against.
+        :param password: The password to compare.
+        '''
+    
+        # Python 3 unicode strings must be encoded as bytes before hashing.
+        pw_hash = self._unicode_to_bytes(pw_hash)
+        password = self._unicode_to_bytes(password)
+    
+        if self._handle_long_passwords:
+            password = hashlib.sha256(password).hexdigest()
+            password = self._unicode_to_bytes(password)
+    
+>       return hmac.compare_digest(bcrypt.hashpw(password, pw_hash), pw_hash)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: Invalid salt
+
+C:\Users\7akee\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask_bcrypt.py:225: ValueError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_flows.py::test_add_to_cart_and_checkout_flow - ...
+========================= 1 failed, 3 passed in 1.78s =========================

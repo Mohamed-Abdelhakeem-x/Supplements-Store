@@ -1,0 +1,14 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\7akee\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.13.9', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.6.0'}, 'Plugins': {'html': '4.1.1', 'metadata': '3.1.1'}}
+rootdir: C:\Personal\Projects\Django\Supplements-Store
+plugins: html-4.1.1, metadata-3.1.1
+collecting ... collected 4 items
+
+tests/integration/test_flows.py::test_home_page PASSED                   [ 25%]
+tests/integration/test_flows.py::test_register_and_login_flow PASSED     [ 50%]
+tests/integration/test_flows.py::test_add_to_cart_and_checkout_flow PASSED [ 75%]
+tests/integration/test_flows.py::test_database_crud_product PASSED       [100%]
+
+============================== 4 passed in 3.52s ==============================
