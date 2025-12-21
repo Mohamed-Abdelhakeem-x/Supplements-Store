@@ -1,11 +1,12 @@
 ###Running the Dashboard
-python -m pytest tests/ui/
+python test_dashboard/app.py
 
 ###Running the Project
 flask run
 
 ###Testing Whole Project
 python -m pytest
+pytest tests/e2e -v
 
 ###Testing a folder
 python -m pytest tests/unit/
