@@ -95,13 +95,13 @@ class TestCartFlow:
                 alert = authorized_driver.switch_to.alert
                 alert.accept()
             except:
-                pass # Maybe no alert or auto accepted?
+                pass
                 
             WebDriverWait(authorized_driver, 5).until(
                 EC.text_to_be_present_in_element((By.TAG_NAME, "body"), "Your shopping cart is empty")
             )
         except Exception as e:
-            # If button not found, maybe cart was already empty
+
             pass
             
         assert "Your shopping cart is empty" in authorized_driver.page_source

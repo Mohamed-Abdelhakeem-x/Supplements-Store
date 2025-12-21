@@ -5,7 +5,7 @@ flask run
 python test_dashboard/app.py
 
 ###Testing Whole Project
-pytest
+pytest tests/
 
 ###Testing a folder
 pytest tests/e2e/

@@ -1,180 +1,5 @@
 [
     {
-        "timestamp": "2025-12-21 01:45:38",
-        "passed": 8,
-        "failed": 0,
-        "total": 12,
-        "duration": 93.83409476280212
-    },
-    {
-        "timestamp": "2025-12-21 01:49:08",
-        "passed": 0,
-        "failed": 0,
-        "total": 12,
-        "duration": 17.2013578414917
-    },
-    {
-        "timestamp": "2025-12-21 01:49:44",
-        "passed": 0,
-        "failed": 0,
-        "total": 12,
-        "duration": 16.849935293197632
-    },
-    {
-        "timestamp": "2025-12-21 01:50:31",
-        "passed": 0,
-        "failed": 0,
-        "total": 3,
-        "duration": 7.0595643520355225
-    },
-    {
-        "timestamp": "2025-12-21 01:51:29",
-        "passed": 0,
-        "failed": 0,
-        "total": 12,
-        "duration": 16.66108226776123
-    },
-    {
-        "timestamp": "2025-12-21 01:53:26",
-        "passed": 0,
-        "failed": 0,
-        "total": 12,
-        "duration": 17.011026859283447
-    },
-    {
-        "timestamp": "2025-12-21 01:53:57",
-        "passed": 0,
-        "failed": 0,
-        "total": 12,
-        "duration": 16.92025113105774
-    },
-    {
-        "timestamp": "2025-12-21 01:55:00",
-        "passed": 0,
-        "failed": 0,
-        "total": 3,
-        "duration": 7.136476039886475
-    },
-    {
-        "timestamp": "2025-12-21 01:56:46",
-        "passed": 8,
-        "failed": 0,
-        "total": 12,
-        "duration": 82.53598856925964
-    },
-    {
-        "timestamp": "2025-12-21 01:59:36",
-        "passed": 8,
-        "failed": 0,
-        "total": 12,
-        "duration": 79.63319492340088
-    },
-    {
-        "timestamp": "2025-12-21 02:02:24",
-        "passed": 9,
-        "failed": 0,
-        "total": 9,
-        "duration": 90.30332016944885
-    },
-    {
-        "timestamp": "2025-12-21 02:04:17",
-        "passed": 8,
-        "failed": 1,
-        "total": 9,
-        "duration": 90.25907492637634
-    },
-    {
-        "timestamp": "2025-12-21 02:09:01",
-        "passed": 9,
-        "failed": 0,
-        "total": 9,
-        "duration": 92.77603459358215
-    },
-    {
-        "timestamp": "2025-12-21 02:11:09",
-        "passed": 9,
-        "failed": 0,
-        "total": 9,
-        "duration": 92.80207920074463
-    },
-    {
-        "timestamp": "2025-12-21 02:17:12",
-        "passed": 9,
-        "failed": 0,
-        "total": 9,
-        "duration": 92.70889449119568
-    },
-    {
-        "timestamp": "2025-12-21 02:24:11",
-        "passed": 9,
-        "failed": 0,
-        "total": 9,
-        "duration": 96.28960156440735
-    },
-    {
-        "timestamp": "2025-12-21 02:29:52",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 161.28894710540771
-    },
-    {
-        "timestamp": "2025-12-21 02:33:07",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 159.75919127464294
-    },
-    {
-        "timestamp": "2025-12-21 02:37:37",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 165.79516696929932
-    },
-    {
-        "timestamp": "2025-12-21 02:40:08",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 159.5551700592041
-    },
-    {
-        "timestamp": "2025-12-21 02:43:42",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 159.3835096359253
-    },
-    {
-        "timestamp": "2025-12-21 02:48:35",
-        "passed": 15,
-        "failed": 1,
-        "total": 16,
-        "duration": 165.0685007572174
-    },
-    {
-        "timestamp": "2025-12-21 02:52:55",
-        "passed": 14,
-        "failed": 2,
-        "total": 16,
-        "duration": 174.6271584033966
-    },
-    {
-        "timestamp": "2025-12-21 02:54:48",
-        "passed": 16,
-        "failed": 2,
-        "total": 18,
-        "duration": 193.93272829055786
-    },
-    {
-        "timestamp": "2025-12-21 02:55:41",
-        "passed": 15,
-        "failed": 0,
-        "total": 16,
-        "duration": 170.3816695213318
-    },
-    {
         "timestamp": "2025-12-21 03:00:05",
         "passed": 15,
         "failed": 1,
@@ -348,5 +173,180 @@
         "failed": 0,
         "total": 9,
         "duration": 0.48294687271118164
+    },
+    {
+        "timestamp": "2025-12-21 20:57:16",
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "duration": 139.4332413673401
+    },
+    {
+        "timestamp": "2025-12-21 21:01:45",
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "duration": 0.4900975227355957
+    },
+    {
+        "timestamp": "2025-12-21 21:02:15",
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "duration": 17.164696216583252
+    },
+    {
+        "timestamp": "2025-12-21 21:04:39",
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "duration": 18.71337056159973
+    },
+    {
+        "timestamp": "2025-12-21 21:06:59",
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "duration": 17.206021547317505
+    },
+    {
+        "timestamp": "2025-12-21 21:09:57",
+        "passed": 0,
+        "failed": 5,
+        "total": 9,
+        "duration": 101.48503923416138
+    },
+    {
+        "timestamp": "2025-12-21 21:09:57",
+        "passed": 0,
+        "failed": 5,
+        "total": 9,
+        "duration": 101.51764965057373
+    },
+    {
+        "timestamp": "2025-12-21 21:12:47",
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "duration": 142.0855848789215
+    },
+    {
+        "timestamp": "2025-12-21 21:20:12",
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "duration": 135.95648980140686
+    },
+    {
+        "timestamp": "2025-12-21 21:21:25",
+        "passed": 0,
+        "failed": 0,
+        "total": 4,
+        "duration": 1.0103163719177246
+    },
+    {
+        "timestamp": "2025-12-21 21:24:30",
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "duration": 41.05164813995361
+    },
+    {
+        "timestamp": "2025-12-21 21:25:08",
+        "passed": 0,
+        "failed": 0,
+        "total": 1,
+        "duration": 0.46471428871154785
+    },
+    {
+        "timestamp": "2025-12-21 21:25:36",
+        "passed": 0,
+        "failed": 0,
+        "total": 0,
+        "duration": 0.30576062202453613
+    },
+    {
+        "timestamp": "2025-12-21 21:26:01",
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "duration": 14.306589603424072
+    },
+    {
+        "timestamp": "2025-12-21 21:26:46",
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "duration": 13.875770807266235
+    },
+    {
+        "timestamp": "2025-12-21 21:30:21",
+        "passed": 24,
+        "failed": 11,
+        "total": 35,
+        "duration": 192.23159003257751
+    },
+    {
+        "timestamp": "2025-12-21 21:31:25",
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "duration": 13.945059776306152
+    },
+    {
+        "timestamp": "2025-12-21 21:34:20",
+        "passed": 35,
+        "failed": 0,
+        "total": 35,
+        "duration": 155.4283139705658
+    },
+    {
+        "timestamp": "2025-12-21 21:36:59",
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "duration": 0.4928097724914551
+    },
+    {
+        "timestamp": "2025-12-21 21:38:00",
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "duration": 17.16578459739685
+    },
+    {
+        "timestamp": "2025-12-21 21:41:21",
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "duration": 145.16259694099426
+    },
+    {
+        "timestamp": "2025-12-21 21:45:22",
+        "passed": 44,
+        "failed": 0,
+        "total": 44,
+        "duration": 161.23596715927124
+    },
+    {
+        "timestamp": "2025-12-21 21:50:35",
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "duration": 0.5050477981567383
+    },
+    {
+        "timestamp": "2025-12-21 21:51:55",
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "duration": 17.33677315711975
+    },
+    {
+        "timestamp": "2025-12-21 21:55:16",
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "duration": 140.0795555114746
     }
 ]

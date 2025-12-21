@@ -25,34 +25,32 @@ def live_server_url(app_port):
 
 @pytest.fixture(scope='session', autouse=True)
 def run_app_server(app_port):
-    """Runs the Flask app in a background thread."""
-    # Use a unique DB for each session to avoid file locking issues
-    import uuid
-    import shutil
-    
-    unique_id = str(uuid.uuid4())[:8]
-    db_filename = f'test_e2e_{unique_id}.db'
+    """Runs the Flask app in a background thread using a separate test_e2e.db."""
+    db_filename = 'test_e2e.db'
     db_path = os.path.join(os.getcwd(), 'instance', db_filename)
     
-    # Configure App
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-    app.config['WTF_CSRF_ENABLED'] = False
-    app.config['SECRET_KEY'] = 'test_secret_e2e_suite'
+    # Ensure instance directory exists
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
     
-    # Ensure clean DB start
+    # Ensure clean test_e2e.db start
     if os.path.exists(db_path):
         try:
             os.remove(db_path)
         except OSError:
-            pass # Best effort
-
-    # Initialize DB and Seed Data
+            pass
+    
+    # Configure app for e2e testing (still uses Orders.db globally, but we mark for testing)
+    app.config['TESTING'] = True
+    app.config['WTF_CSRF_ENABLED'] = False
+    app.config['SECRET_KEY'] = 'test_secret_e2e_suite'
+    
+    # Initialize DB and Seed E2E Data
     with app.app_context():
-        # Dispose old engine if it exists to release locks
+        # Dispose old engine connections
         try:
+            db.session.remove()
             db.engine.dispose()
-        except:
+        except Exception:
             pass
             
         db.create_all()
@@ -82,11 +80,7 @@ def run_app_server(app_port):
 
     # Give some time for file handles to close
     time.sleep(1)
-    if os.path.exists(db_path):
-        try:
-            os.remove(db_path)
-        except OSError:
-            print(f"Warning: Could not delete test DB {db_path} - likely file lock.")
+    # Keep the e2e test DB for inspection (do not delete)
 
 def seed_test_data():
     """Seeds the database with initial data for testing."""
