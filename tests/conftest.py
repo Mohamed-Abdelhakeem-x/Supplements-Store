@@ -1,4 +1,9 @@
 import pytest
+import os
+
+# Mark that we're running in test mode (before importing app)
+os.environ['TESTING_MODE'] = '1'
+
 from Prime_Supplements import app, db, bcrypt
 from Prime_Supplements.models import User, Product, Cart, CartItem
 import os

@@ -25,26 +25,17 @@ def live_server_url(app_port):
 
 @pytest.fixture(scope='session', autouse=True)
 def run_app_server(app_port):
-    """Runs the Flask app in a background thread using a separate test_e2e.db."""
-    db_filename = 'test_e2e.db'
-    db_path = os.path.join(os.getcwd(), 'instance', db_filename)
+    """Runs the Flask app in a background thread using an isolated in-memory test database."""
+    # E2E tests use in-memory SQLite so they don't touch Orders.db
+    # This keeps the production database clean during all test runs
     
-    # Ensure instance directory exists
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
-    
-    # Ensure clean test_e2e.db start
-    if os.path.exists(db_path):
-        try:
-            os.remove(db_path)
-        except OSError:
-            pass
-    
-    # Configure app for e2e testing (still uses Orders.db globally, but we mark for testing)
+    # Configure app for e2e testing with in-memory database
     app.config['TESTING'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['WTF_CSRF_ENABLED'] = False
     app.config['SECRET_KEY'] = 'test_secret_e2e_suite'
     
-    # Initialize DB and Seed E2E Data
+    # Initialize DB and Seed E2E Data in memory
     with app.app_context():
         # Dispose old engine connections
         try:

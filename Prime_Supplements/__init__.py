@@ -8,9 +8,12 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '123 456 789'
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-# Go up one level to project root, then into instance
-# Or just put it in instance explicitly
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, '..', 'instance', 'Orders.db')
+
+# Use in-memory database if in test mode, otherwise use Orders.db
+if os.environ.get('TESTING_MODE'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, '..', 'instance', 'Orders.db')
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -45,7 +48,14 @@ def init_db():
             db.session.add_all(products)
             db.session.commit()
 
-init_db()
+# Only initialize production DB if not running tests
+# Tests will configure their own databases
+import sys
+if not os.environ.get('TESTING_MODE'):
+    init_db()
+else:
+    # In test mode - skip init_db() to protect Orders.db
+    pass
 
 
 from Prime_Supplements.Main.routes import main
