@@ -35,6 +35,11 @@ def init_database(client):
 
 def pytest_sessionstart(session):
     session.start_time = time.time()
+    # also store on config so other hooks can access it
+    try:
+        session.config.start_time = session.start_time
+    except Exception:
+        pass
 
 def pytest_sessionfinish(session, exitstatus):
     # 1. History Handling
@@ -90,3 +95,27 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         }
         with open(coverage_file, 'w') as f:
             json.dump(zero_cov, f)
+
+    # Print a concise test report to the terminal (non-intrusive)
+    try:
+        stats = getattr(terminalreporter, 'stats', {}) or {}
+        passed = len(stats.get('passed', []))
+        failed = len(stats.get('failed', []))
+        skipped = len(stats.get('skipped', []))
+        error = len(stats.get('error', []))
+        total = passed + failed + skipped + error
+        duration = 0.0
+        try:
+            duration = time.time() - getattr(config, 'start_time', 0.0)
+        except Exception:
+            duration = 0.0
+
+        terminalreporter.write_sep('=', 'Test Summary')
+        terminalreporter.write_line(f'Passed: {passed}  Failed: {failed}  Skipped: {skipped}  Errors: {error}  Total: {total}')
+        terminalreporter.write_line(f'Duration: {duration:.2f}s')
+        history_file = os.path.join(config.rootdir, 'test_dashboard', 'history.json')
+        terminalreporter.write_line(f'History: {history_file}')
+        terminalreporter.write_sep('=', '')
+    except Exception:
+        # Do not interfere with pytest if printing fails
+        pass
