@@ -5,9 +5,16 @@ Flask-SQLAlchemy
 Flask-Bcrypt
 Flask-Login
 email-validator
+
+# Testing / CI
 pytest
+pytest-cov
+pytest-xdist
 coverage
 selenium
 webdriver-manager
 pytest-json-report
 pytest-html
+
+# Optional: add test helpers as needed
+requests

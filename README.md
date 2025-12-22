@@ -34,30 +34,71 @@
 
 ## 🧪 Testing
 
-The project employs a comprehensive testing strategy ensuring **100% Code Coverage** and high reliability.
+This repository includes unit, integration, and UI (end-to-end) tests. The tests are organised under `tests/` and are designed to run locally and in CI.
 
-### Strategy
-1.  **Unit Tests** (`tests/unit`): Verify service layer logic (cart calculations, validations) in isolation.
-2.  **Integration Tests** (`tests/integration`): Test HTTP routes, database interactions, and user flows.
-3.  **UI/System Tests** (`tests/ui`): End-to-end tests using **Selenium WebDriver** to simulate real user behavior (Chrome).
+### Test types and locations
 
-### Quality Assurance
-- **100% Code Coverage**: Every line of code, including error handlers and edge cases, is covered by tests.
-- **Regression Safety**: The robust suite enables confident refactoring and feature additions.
+- **Unit tests**: `tests/unit/` — test isolated functions and services (business logic, helpers).
+- **Integration tests**: `tests/integration/` — exercise Flask routes, DB interactions, and combined components.
+- **UI / E2E tests**: `tests/e2e/` (or `tests/ui/`) — browser-driven flows using Selenium (the project contains WebDriver-based tests).
 
-### Running Tests
-To run the full test suite and view coverage:
+### Running tests locally
+
+Run the full test suite:
+
 ```bash
-coverage run --branch --source=Prime_Supplements -m pytest tests/
+pytest
+```
+
+Run unit-only:
+
+```bash
+pytest tests/unit
+```
+
+Run coverage and generate a report:
+
+```bash
+coverage run --branch -m pytest
 coverage report -m
 ```
 
-### Automation Dashboard
-A custom **Test Automation Dashboard** is available to visualize results, track build history, and view failure screenshots.
+Generate an HTML coverage report:
+
+```bash
+coverage run --branch -m pytest && coverage html
+# open htmlcov/index.html
+```
+
+### Running UI (Selenium) tests
+
+This project uses `webdriver-manager` to simplify WebDriver installation. To run UI tests headless (recommended for CI):
+
+```bash
+# example: run the e2e tests with headless chrome via environment variable (tests may read this)
+pytest tests/e2e -k "not slow" -q
+```
+
+If your tests require a visible browser, omit headless configuration or set your WebDriver accordingly.
+
+### Useful pytest flags
+
+- `-k <expr>`: run subset matching an expression
+- `-m <marker>`: run tests marked with a pytest marker
+- `-q` / `-vv`: quiet or verbose
+- `-n auto` (with `pytest-xdist`): run tests in parallel
+
+### Test reporting & automation dashboard
+
+The repository contains a small test dashboard app for viewing saved test results and screenshots (if present):
+
 ```bash
 python test_dashboard/app.py
 ```
-Access at `http://localhost:5001`.
+
+Open the dashboard at `http://localhost:5001`.
+
+CI systems can also export `pytest-json-report` or `pytest-html` reports; this repo includes helpers to generate those formats.
 
 ## 🚀 Getting Started
 
@@ -97,8 +138,17 @@ Prime_Supplements/
 ├── templates/      # HTML pages
 ├── static/         # CSS, JS, Images
 │
-tests/              # Test Suite (Unit, Integration, UI)
-test_dashboard/     # Automated Test Dashboard
+tests/
+│
+├── unit/           # Unit tests: isolated service and helper logic (tests/unit)
+├── integration/    # Integration tests: Flask routes, DB interactions (tests/integration)
+├── ui/             # UI tests: older UI-focused tests (Selenium based, if used)
+├── e2e/            # End-to-end tests: full browser flows and user scenarios (tests/e2e)
+│
+test_dashboard/    # Small Flask app that visualizes test reports and screenshots
+│
+├── templates/      # Dashboard HTML templates used by the app
+│
 ```
 
 ## 📸 Screenshots
@@ -114,7 +164,7 @@ test_dashboard/     # Automated Test Dashboard
 ## 👨‍💻 Author
 
 **Mohamed Abdelhakeem**  
-An aspiring Backend Engineer passionate about building modern, scalable web applications.
+An aspiring Software Engineer passionate about building modern, scalable applications.
 
 ## 📝 License
 
