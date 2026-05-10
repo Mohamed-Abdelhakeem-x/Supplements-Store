@@ -19,5 +19,5 @@ webdriver-manager
 pytest-json-report
 pytest-html
 
-# Optional: add test helpers as needed
+# Optional
 requests
