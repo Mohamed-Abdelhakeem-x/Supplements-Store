@@ -5,6 +5,9 @@ Flask-SQLAlchemy
 Flask-Bcrypt
 Flask-Login
 email-validator
+gunicorn
+pyOpenSSL
+cryptography
 
 # Testing / CI
 pytest
