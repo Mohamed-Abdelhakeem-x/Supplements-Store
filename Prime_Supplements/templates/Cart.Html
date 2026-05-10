@@ -21,16 +21,16 @@
                                 <div class="p-5">
                                     <div class="d-flex justify-content-between align-items-center mb-5">
                                         <h4 class="fw-bold mb-0 text-black">
-                                            Shopping Cart
+                                            <span data-i18n="cart.shopping_cart">Shopping Cart</span>
                                             {% if current_user.is_authenticated %}
                                                 <span style="font-size:1rem; color:rgb(180,27,0); margin-left:6px;">
-                                                    for {{ current_user.username }}
+                                                    <span data-i18n="cart.for">for</span> {{ current_user.username }}
                                                 </span>
                                             {% endif %}
                                         </h4>
                                         {% if cart_items and cart_items|length > 0 %}
                                         <form method="POST" action="{{ url_for('cart.clear_cart') }}">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Clear your cart?')">Clear Cart</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Clear your cart?')" data-i18n="cart.clear_cart">Clear Cart</button>
                                         </form>
                                         {% endif %}
                                     </div>
@@ -46,19 +46,19 @@
                                                             <div class="d-flex align-items-center">
                                                                 <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" width="50" height="50" style="margin-right: 1rem;">
                                                                 <div>
-                                                                    <strong>{{ item.product.name }}</strong> — {{ item.product.description or '' }}<br>
-                                                                    Quantity: {{ item.quantity }}<br>
-                                                                    Price: ${{ "%.2f"|format(item.product.price) }} x {{ item.quantity }} = <strong>${{ "%.2f"|format(item.product.price * item.quantity) }}</strong>
+                                                                    <strong><span data-i18n="products.{{ item.product.name|replace(' ', '_')|lower }}.name">{{ item.product.name }}</span></strong> — <span data-i18n="products.{{ item.product.name|replace(' ', '_')|lower }}.desc">{{ item.product.description or '' }}</span><br>
+                                                                    <span data-i18n="cart.quantity">Quantity:</span> {{ item.quantity }}<br>
+                                                                    <span data-i18n="cart.price">Price:</span> ${{ "%.2f"|format(item.product.price) }} x {{ item.quantity }} = <strong>${{ "%.2f"|format(item.product.price * item.quantity) }}</strong>
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     {% endfor %}
                                                 {% else %}
-                                                    <li>Your shopping cart is empty.</li>
+                                                    <li data-i18n="cart.empty_cart">Your shopping cart is empty.</li>
                                                 {% endif %}
                                                 </ul>
                                                 {% if cart_items and cart_items|length > 0 %}
-                                                    <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
+                                                    <p><strong><span data-i18n="cart.total">Total:</span> ${{ "%.2f"|format(total) }}</strong></p>
                                                 {% endif %}
                                             </div>  
                                         </div>
@@ -66,11 +66,11 @@
                                     <!-- PayPal Button -->
                                     {% if total > 0 %}
                                     <a href="https://www.paypal.me/hakeem4reall/{{ '%.2f'|format(total) }}" class="paypal-button" target="_blank">
-                                        <i class="fab fa-paypal"></i> Pay ${{ '%.2f'|format(total) }} with PayPal
+                                        <i class="fab fa-paypal"></i> <span data-i18n="cart.pay">Pay</span> ${{ '%.2f'|format(total) }} <span data-i18n="cart.with_paypal">with PayPal</span>
                                     </a>
                                     {% else %}
                                     <a href="https://www.paypal.me/hakeem4reall" class="paypal-button" target="_blank">
-                                        <i class="fab fa-paypal"></i> Pay with PayPal
+                                        <i class="fab fa-paypal"></i> <span data-i18n="cart.pay_with_paypal">Pay with PayPal</span>
                                     </a>
                                     {% endif %}
                                 </div>

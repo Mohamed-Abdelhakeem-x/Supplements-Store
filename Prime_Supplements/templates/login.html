@@ -12,10 +12,10 @@
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Log In</legend>
+            <legend class="border-bottom mb-4" data-i18n="login.legend">Log In</legend>
 
             <div class="form-group">
-                {{ form.email.label(class='form-control-label') }}
+                {{ form.email.label(class='form-control-label', **{'data-i18n': 'login.email_label'}) }}
                 {% if form.email.errors %}
                     {{ form.email(class='form-control form-control-lg is-invalid') }}
                     <div class="invalid-feedback">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                {{ form.password.label(class='form-control-label') }}
+                {{ form.password.label(class='form-control-label', **{'data-i18n': 'login.password_label'}) }}
                 {% if form.password.errors %}
                     {{ form.password(class='form-control form-control-lg is-invalid') }}
                     <div class="invalid-feedback">
@@ -43,17 +43,17 @@
             </div>
 
             <div class="form-group my-3">
-                {{ form.login(class='btn btn-primary') }}
+                {{ form.login(class='btn btn-primary', **{'data-i18n': 'login.login_btn'}) }}
             </div>
             <div class="form-check">
                 {{ form.remember(class='form-check-input') }}
-                {{ form.remember.label(class='form-check-input-label') }}
+                {{ form.remember.label(class='form-check-input-label', **{'data-i18n': 'login.remember_label'}) }}
             </div>
         </fieldset>
     </form>
     <small class="text-muted">
-        Need An Account?
-        <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Here</a>
+        <span data-i18n="login.need_account">Need An Account?</span>
+        <a class="ml-2" href="{{ url_for('users.register') }}" data-i18n="login.sign_up_here">Sign Up Here</a>
     </small>
 </div>
 {% endblock %}
