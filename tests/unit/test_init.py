@@ -5,7 +5,7 @@ from Prime_Supplements.models import Product, User
 
 class TestInitApp(unittest.TestCase):
     def test_init_db_creates_data(self):
-        """Test that init_db creates initial products if table is empty."""
+        """Test that init_db creates initial products if db is empty."""
         
         # We need to run this with an app context
         from Prime_Supplements import app
