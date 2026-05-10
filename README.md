@@ -160,6 +160,7 @@ test_dashboard/    # Small Flask app that visualizes test reports and screenshot
 
 - 🐙 GitHub: [Supplements-Store](https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store)
 - 🐳 Docker Hub: [`mohamedabdelhakeem/prime-supplements`](https://hub.docker.com/r/mohamedabdelhakeem/prime-supplements)
+- 🐳 run it by pulling the project then writing: docker run -p 3000:3000 mohamedabdelhakeem/prime-supplements:latest
 
 ## 👨‍💻 Author
 
