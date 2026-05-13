@@ -9,11 +9,15 @@ app.config['SECRET_KEY'] = '123 456 789'
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# Use in-memory database if in test mode, otherwise use Orders.db
+# Use in-memory database if in test mode, otherwise use MySQL database
 if os.environ.get('TESTING_MODE'):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, '..', 'instance', 'Orders.db')
+    # Use DATABASE_URI from environment variables if running in Docker, else fallback to local connection
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+        'DATABASE_URI', 
+        'mysql+pymysql://root:192003@127.0.0.1:3306/Prime'
+    )
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
