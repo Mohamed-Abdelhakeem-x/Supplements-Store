@@ -160,8 +160,49 @@ test_dashboard/    # Small Flask app that visualizes test reports and screenshot
 
 - 🐙 GitHub: [Supplements-Store](https://github.com/Mohamed-Abdelhakeem-x/Supplements-Store)
 - 🐳 Docker Hub: [`mohamedabdelhakeem/prime-supplements`](https://hub.docker.com/r/mohamedabdelhakeem/prime-supplements)
-- 🐳 run it by pulling the project then writing: docker run -p 3000:3000 mohamedabdelhakeem/prime-supplements:latest
 
+### 🐳 How to Pull and Run the Project
+
+Since the application uses a MySQL database, the easiest way to run it is using Docker Compose. 
+
+**Step 1:** Create a file named `docker-compose.yml` anywhere on your computer and paste the following into it:
+```yaml
+version: '3.8'
+
+services:
+  web:
+    image: mohamedabdelhakeem/prime-supplements:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=0
+      - DATABASE_URI=mysql+pymysql://root:192003@db:3306/Prime
+    depends_on:
+      db:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=Prime
+      - MYSQL_ROOT_PASSWORD=192003
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+```
+
+**Step 2:** Open a terminal in that folder and run:
+```bash
+docker compose up -d
+```
+Docker will automatically pull the image and the database, link them, and start the app at `http://localhost:3000`.
 ## 👨‍💻 Author
 
 **Mohamed Abdelhakeem**  
