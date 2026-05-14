@@ -16,7 +16,7 @@ else:
     # Use DATABASE_URI from environment variables if running in Docker, else fallback to local connection
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
         'DATABASE_URI', 
-        'mysql+pymysql://root:192003@127.0.0.1:3306/Prime'
+        'sqlite:///' + os.path.join(app.root_path, '..', 'instance', 'Orders.db')
     )
 
 db = SQLAlchemy(app)
